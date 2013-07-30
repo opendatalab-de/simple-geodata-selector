@@ -53,7 +53,11 @@
 
 			});
 			$('.btn-clear').on('click', function() {
-
+				for ( var key in landkreise) {
+					if (landkreise[key].selected) {
+						deselectLayer(landkreise[key]);
+					}
+				}
 			});
 
 			$('.chkbox-bdl input[type=checkbox]').on('click', function(element) {
