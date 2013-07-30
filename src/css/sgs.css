@@ -11,7 +11,7 @@ body {
 
 #map {
 	left: 0;
-	right: 0;
+	right: 280px;
 	z-index: 0;
 }
 
@@ -27,13 +27,23 @@ body {
 .options,
 .controls {
 	padding: 7px 14px 0 14px;
-	margin-bottom: 2em;
+	margin-bottom: 1em;
 }
 .controls {
 	padding-top: 0;
 }
-.btn-clear {
+.btn-clear,
+.btn-export {
 	margin-top: 1em;
+}
+
+.checkbox {
+	margin-top: 7px;
+	margin-bottom: 7px;
+}
+
+#selectionStatus .table {
+	margin-bottom: 0;
 }
 
 .timer {

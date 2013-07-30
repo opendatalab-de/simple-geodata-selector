@@ -51,31 +51,27 @@
 			<fieldset>
 				<legend>Optionen</legend>
 				
-				<div class="row">
-					<div class="col-6" title="Wie stark vereinfacht sollen die Polygone exportiert werden?">
-						<strong>Simplify</strong><br />
-						<select name="simplify">
-							<option value="200">200</option>
-							<option value="20">20</option>
-							<option value="0">0</option>
-						</select>
-					</div>
-					<div class="col-6 toggle-tooltip" title="Welche Ebene soll exportiert werden?">
-						<strong>Exportieren</strong><br />
-						<select name="exportLayer">
-							<option value="gemeinden">Gemeinden</option>
-							<option value="landkreise">Landkreise</option>
-						</select>
-					</div>
-				</div>
-				<br />
-
 				<p>
 					<strong>Aktuelle Auswahl:</strong>
+					<div id="selectionStatus"></div>
 				</p>
-				<div id="selectionStatus">
-				</div>
 
+				<p>
+					<strong title="Wie stark vereinfacht sollen die Polygone exportiert werden?">Simplify</strong><br />
+					<select name="simplify">
+						<option value="200">200</option>
+						<option value="20">20</option>
+						<option value="0">0</option>
+					</select>
+				</p>
+
+				<p>
+					<strong title="Welche Ebene soll exportiert werden?">Was exportieren?</strong><br />
+					<select name="exportLayer">
+						<option value="gemeinden">Gemeindeflächen der Landkreise</option>
+						<option value="landkreise">Landkreisflächen</option>
+					</select>
+				</p>
 				
 				<button type="button" class="btn btn-primary btn-export">
 					<span class="glyphicon glyphicon-download"></span>
