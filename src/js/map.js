@@ -5,7 +5,7 @@
 	var areaStatus = {};
 
 	function updateSelectionStatus() {
-		var status = $('<table class="table table-striped">');
+		var status = $('<table class="table table-striped table-condensed">');
 		for ( var x = 0; x < knownAreaTypes.length; x++) {
 			areaStatus[knownAreaTypes[x]] = 0;
 		}
