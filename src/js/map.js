@@ -103,7 +103,7 @@
 			this.info.update = function(props) {
 				this._div.innerHTML = '<h4>Aktuell</h4>'
 						+ (props ? '<b>' + props.GEN + ' (' + props.DES + ')</b> ' + props.RS
-								: 'Mit der der Maus auswählen');
+								: 'Mit der Maus auswählen');
 			};
 
 			this.info.addTo(this.leafletMap);
