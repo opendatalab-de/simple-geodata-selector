@@ -97,7 +97,16 @@ module.exports = function(grunt) {
 		},
 		devserver: {
 			options: {
-				port: 8888
+				port: 8091
+			}
+		},
+		testacular: {
+			unit: {
+				options: {
+					configFile: 'test/testacular.conf.js',
+					autoWatch: true,
+					keepalive: true
+				}
 			}
 		}
 	});
@@ -114,7 +123,9 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-rev');
 	grunt.loadNpmTasks('grunt-usemin');
 	grunt.loadNpmTasks('grunt-devserver');
+	grunt.loadNpmTasks('grunt-testacular');
 
+	grunt.registerTask('test', ['testacular', 'jshint']);
 	grunt.registerTask('dataupdate', ['jsonmin:dist']);
 	grunt.registerTask('build', ['clean:dist', 'useminPrepare', 'imagemin', 'concat', 'cssmin', 'uglify', 'copy:dist', 'rev', 'usemin']);
 	grunt.registerTask('default', ['build']);
