@@ -17,5 +17,9 @@ body {
 #nav {
 	right: 0;
 	width: 260px;
-	background: #F0F0F0;
+	background: #eee;
+}
+
+.options {
+	padding: 14px;
 }
