@@ -1,5 +1,7 @@
 var sgs = {};
 
+var landkreise = {};
+
 (function(sgs) {
 	'use strict';
 
