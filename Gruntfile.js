@@ -125,7 +125,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-devserver');
 	grunt.loadNpmTasks('grunt-testacular');
 
-	grunt.registerTask('test', ['testacular', 'jshint']);
+	grunt.registerTask('test', ['testacular']);
 	grunt.registerTask('dataupdate', ['jsonmin:dist']);
 	grunt.registerTask('build', ['clean:dist', 'useminPrepare', 'imagemin', 'concat', 'cssmin', 'uglify', 'copy:dist', 'rev', 'usemin']);
 	grunt.registerTask('default', ['build']);
