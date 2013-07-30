@@ -12,6 +12,7 @@
 
 <!-- build:css css/hdv.css -->
 <link href="css/bootstrap.css" rel="stylesheet" /> 
+<link href="css/bootstrap-glyphicons.css" rel="stylesheet" /> 
 <link href="css/leaflet.css" rel="stylesheet" /> 
 <link href="css/sgs.css" rel="stylesheet" /> 
 <!-- endbuild -->
@@ -55,8 +56,10 @@
 					</select>
 				</div>
 				
-				<button type="button" class="btn btn-default btn-export">Export .geojson</button>
-				<button type="button" class="btn btn-default btn-clear">Auswahl löschen</button>
+				<button type="button" class="btn btn-primary btn-export">
+					<span class="glyphicon glyphicon-download"></span>
+					Export .geojson
+				</button>
 			</fieldset>
 		</form>
 		
@@ -111,8 +114,12 @@
 				<div class="checkbox">
 					<label><input type="checkbox" value="16" /> Thüringen</label>
 				</div>
+				
+				<button type="button" class="btn btn-default btn-clear">
+					<span class="glyphicon glyphicon-remove"></span>
+					Auswahl löschen
+				</button>
 			</fieldset>
-			
 		</form>
 	</div>
 
