@@ -1,21 +1,12 @@
 (function(sgs, L) {
 	'use strict';
 
-	var knownAreaTypes = ['Landkreis', 'Kreis', 'Kreisfreie Stadt', 'Stadtkreis'];
-	var areaStatus = {};
-
 	function updateSelectionStatus() {
-		var status = $('<table class="table table-striped table-condensed">');
-		for ( var x = 0; x < knownAreaTypes.length; x++) {
-			areaStatus[knownAreaTypes[x]] = 0;
-		}
+		var status = 0;
 		for ( var key in landkreise) {
 			if (landkreise[key].selected) {
-				areaStatus[landkreise[key].DES]++;
+				status++;
 			}
-		}
-		for ( var x = 0; x < knownAreaTypes.length; x++) {
-			status.append("<tr><td>" + knownAreaTypes[x] + "</td><td>" + areaStatus[knownAreaTypes[x]] + "</td></tr>");
 		}
 		$('#selectionStatus').html(status);
 
@@ -100,7 +91,8 @@
 			};
 
 			this.info.update = function(props) {
-				this._div.innerHTML = '<h4>Aktuell</h4>' + (props ? '<b>' + props.GEN + ' (' + props.DES + ')</b> ' + props.RS : 'Mit der der Maus auswählen');
+				this._div.innerHTML = '<h4>Kreis</h4>'
+						+ (props ? '<b>' + props.GEN + ' (' + props.DES + ')</b> ' + props.RS : 'Mit der der Maus auswählen');
 			};
 
 			this.info.addTo(this.leafletMap);

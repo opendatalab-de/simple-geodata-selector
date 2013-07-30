@@ -27,7 +27,7 @@ body {
 .options,
 .controls {
 	padding: 7px 14px 0 14px;
-	margin-bottom: 1em;
+	margin-bottom: 2em;
 }
 .controls {
 	padding-top: 0;
@@ -35,11 +35,6 @@ body {
 .btn-clear,
 .btn-export {
 	margin-top: 1em;
-}
-
-.checkbox {
-	margin-top: 7px;
-	margin-bottom: 7px;
 }
 
 #selectionStatus .table {

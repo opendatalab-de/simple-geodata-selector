@@ -7,6 +7,5 @@ var landkreise = {};
 
 	sgs.init = function() {
 		sgs.map.init();
-		$('.toggle-tooltip').tooltip();
 	};
 })(sgs);
