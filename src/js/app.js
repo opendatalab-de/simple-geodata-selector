@@ -65,3 +65,11 @@ var bundeslaender = [ {
 	"GEN" : "Thüringen",
 	"DES" : "Freistaat",
 } ];
+
+(function(sgs) {
+	'use strict';
+
+	sgs.init = function() {
+		sgs.map.init();
+	};
+})(sgs);
