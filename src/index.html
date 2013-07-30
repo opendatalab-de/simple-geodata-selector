@@ -18,7 +18,7 @@
 <!-- endbuild -->
 </head>
 <body>
-	<div class="navbar navbar-fixed-top">
+	<div class="navbar navbar-inverse navbar-fixed-top">
 		<a class="navbar-brand" href="#">Geodata Selector</a>
 		<ul class="nav navbar-nav">
 			<li><a href="http://blog.opendatalab.de/">About</a></li>
@@ -35,22 +35,24 @@
 			<fieldset>
 				<legend>Optionen</legend>
 				
-				<div class="form-group">
-					<label>Simplify</label>
-					<select name="simplify">
-						<option value="200">200</option>
-						<option value="20">20</option>
-						<option value="0">0</option>
-					</select>
+				<div class="row">
+					<div class="col-6" title="Wie stark vereinfacht sollen die Polygone exportiert werden?">
+						<strong>Simplify</strong><br />
+						<select name="simplify">
+							<option value="200">200</option>
+							<option value="20">20</option>
+							<option value="0">0</option>
+						</select>
+					</div>
+					<div class="col-6 toggle-tooltip" title="Welche Ebene soll exportiert werden?">
+						<strong>Ebene</strong><br />
+						<select name="exportLayer">
+							<option value="gemeinden">Gemeinden</option>
+							<option value="landkreise">Landkreise</option>
+						</select>
+					</div>
 				</div>
-
-				<div class="form-group">
-					<label>Was exportieren?</label>
-					<select name="exportLayer">
-						<option value="gemeinden">Gemeinden</option>
-						<option value="landkreise">Landkreise</option>
-					</select>
-				</div>
+				<br />
 
 				<p>
 					<strong>Aktuelle Auswahl:</strong>
@@ -117,12 +119,12 @@
 				<div class="checkbox">
 					<label><input type="checkbox" value="16" /> Thüringen</label>
 				</div>
-				
-				<button type="button" class="btn btn-default btn-clear">
-					<span class="glyphicon glyphicon-remove"></span>
-					Auswahl löschen
-				</button>
 			</fieldset>
+			
+			<button type="button" class="btn btn-default btn-clear">
+				<span class="glyphicon glyphicon-remove"></span>
+				Auswahl löschen
+			</button>
 		</form>
 	</div>
 

@@ -5,26 +5,35 @@ body {
 #map,
 #nav {
 	position: absolute;
-	top: 50px;
 	bottom: 0;
+	top: 50px;
 }
 
 #map {
 	left: 0;
-	right: 260px;
+	right: 0;
+	z-index: 0;
 }
 
 #nav {
 	right: 0;
-	width: 260px;
-	background: #eee;
+	width: 280px;
+	background: #FFF;
 	overflow: auto;
+	z-index: 100;
+	opacity: 0.9;
 }
 
 .options,
 .controls {
-	padding: 0 14px;
+	padding: 7px 14px 0 14px;
 	margin-bottom: 2em;
+}
+.controls {
+	padding-top: 0;
+}
+.btn-clear {
+	margin-top: 1em;
 }
 
 .timer {
