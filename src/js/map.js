@@ -1,13 +1,18 @@
 (function(sgs, L) {
 	'use strict';
 
-	var knownAreaTypes = [ 'Landkreis', 'Kreis', 'Kreisfreie Stadt' ];
+	var knownAreaTypes = [ 'Landkreis', 'Kreis', 'Kreisfreie Stadt', 'Stadtkreis' ];
 	var areaStatus = {};
 
 	function updateSelectionStatus() {
-		var status = $('table');
+		var status = $('<table class="table table-striped">');
 		for ( var x = 0; x < knownAreaTypes.length; x++) {
 			areaStatus[knownAreaTypes[x]] = 0;
+		}
+		for ( var key in landkreise) {
+			if (landkreise[key].selected) {
+				areaStatus[landkreise[key].DES]++;
+			}
 		}
 		for ( var x = 0; x < knownAreaTypes.length; x++) {
 			status.append("<tr><td>" + knownAreaTypes[x] + "</td><td>"
@@ -16,7 +21,6 @@
 		$('#selectionStatus').html(status);
 
 	}
-
 	function selectLayer(layer) {
 		layer.setStyle({
 			color : "#ff0000"
@@ -34,7 +38,7 @@
 	function progressReport(event) {
 		if (event.lengthComputable) {
 			var percent = parseInt((event.loaded / event.total * 100), 10);
-			timer.draw(percent);
+			sgs.timer.draw(percent);
 		}
 	}
 	var map = {
@@ -75,6 +79,9 @@
 					if (landkreise[key].selected) {
 						deselectLayer(landkreise[key]);
 					}
+					$('.chkbox-bdl input[type=checkbox]').each(function(index, element) {
+						element.checked = false;
+					});
 				}
 			});
 
@@ -108,6 +115,7 @@
 						},
 						onEachFeature : function(feature, layer) {
 							landkreise[feature.properties.RS] = layer;
+							layer['DES'] = feature.properties.DES;
 							layer.on("click", function(e) {
 								if (e.target.selected) {
 									deselectLayer(e.target);

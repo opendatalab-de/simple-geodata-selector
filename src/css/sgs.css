@@ -52,6 +52,11 @@ body {
 	width: 1em;
 	height: 1em;
 	clip: rect(0px, 1em, 1em, 0.5em);
+	-webkit-animation: pulsate 1s ease-out infinite;
+	-moz-animation: spin 1s ease-out infinite;
+	-ms-animation: spin 1s ease-out infinite;
+	-o-animation: spin 1s ease-out infinite;
+	animation: spin 1s ease-out infinite;
 }
 
 .timer>#slice.gt50 {
@@ -59,7 +64,7 @@ body {
 }
 
 .timer>#slice>.pie {
-	border: 0.1em solid #c0c0c0;
+	border: 0.1em solid #4292C6;
 	position: absolute;
 	width: 0.8em; /* 1 - (2 * border width) */
 	height: 0.8em; /* 1 - (2 * border width) */
@@ -67,11 +72,6 @@ body {
 	-moz-border-radius: 0.5em;
 	-webkit-border-radius: 0.5em;
 	border-radius: 0.5em;
-	-webkit-animation: pulsate 1s ease-out infinite;
-	-moz-animation: spin 1s ease-out infinite;
-	-ms-animation: spin 1s ease-out infinite;
-	-o-animation: spin 1s ease-out infinite;
-	animation: spin 1s ease-out infinite;
 }
 
 .timer>#slice>.pie.fill {
@@ -83,27 +83,27 @@ body {
 
 @-webkit-keyframes pulsate {
     from { opacity: 0.4; }
-    50% { opacity: 1.0; }
+    50% { opacity: 0.9; }
     to { opacity: 0.4; }
 }
 @-moz-keyframes spin {
     from { opacity: 0.4; }
-    50% { opacity: 1.0; }
+    50% { opacity: 0.9; }
     to { opacity: 0.4; }
 }
 @-ms-keyframes spin {
     from { opacity: 0.4; }
-    50% { opacity: 1.0; }
+    50% { opacity: 0.9; }
     to { opacity: 0.4; }
 }
 @-o-keyframes spin {
     from { opacity: 0.4; }
-    50% { opacity: 1.0; }
+    50% { opacity: 0.9; }
     to { opacity: 0.4; }
 }
 @keyframes spin {
     from { opacity: 0.4; }
-    50% { opacity: 1.0; }
+    50% { opacity: 0.9; }
     to { opacity: 0.4; }
 }
 
