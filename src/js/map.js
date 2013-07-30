@@ -12,13 +12,14 @@
 			color : "#ff0000"
 		});
 		layer.selected = true;
-		up
+		updateSelectionStatus();
 	}
 	function deselectLayer(layer) {
 		layer.setStyle({
 			color : "#03f"
 		});
 		layer.selected = false;
+		updateSelectionStatus();
 	}
 	function progressReport(event) {
 		if (event.lengthComputable) {
