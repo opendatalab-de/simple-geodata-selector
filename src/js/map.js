@@ -2,8 +2,18 @@
 	'use strict';
 
 	var knownAreaTypes = [ 'Landkreis', 'Kreis', 'Kreisfreie Stadt' ];
+	var areaStatus = {};
 
 	function updateSelectionStatus() {
+		var status = $('table');
+		for ( var x = 0; x < knownAreaTypes.length; x++) {
+			areaStatus[knownAreaTypes[x]] = 0;
+		}
+		for ( var x = 0; x < knownAreaTypes.length; x++) {
+			status.append("<tr><td>" + knownAreaTypes[x] + "</td><td>"
+					+ areaStatus[knownAreaTypes[x]] + "</td></tr>");
+		}
+		$('#selectionStatus').html(status);
 
 	}
 
@@ -71,6 +81,7 @@
 			$('.chkbox-bdl input[type=checkbox]').on('click', function(element) {
 				that.selectLayers(element.target.value, element.target.checked);
 			});
+			updateSelectionStatus();
 		},
 		addTileLayer : function() {
 			var attribution = '© 2013 CloudMade – Map data <a href="http://creativecommons.org/licenses/by-sa/2.0/">CCBYSA</a> 2013 <a href="http://www.openstreetmap.org/">OpenStreetMap.org</a> contributors – <a href="http://cloudmade.com/terms_conditions">Terms of Use</a>';
