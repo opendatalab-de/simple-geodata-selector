@@ -43,6 +43,7 @@
 	}
 	var map = {
 		leafletMap : null,
+		info : null,
 		init : function() {
 			this.leafletMap = L.map('map', {
 				center : [ 51.165691, 10.451526 ],
@@ -50,7 +51,7 @@
 				minZoom : 5,
 				maxZoom : 12
 			});
-
+			this.createInfoControl();
 			this.addTileLayer();
 			this.addAreaLayers();
 			var that = this;
@@ -90,6 +91,23 @@
 			});
 			updateSelectionStatus();
 		},
+		createInfoControl : function() {
+			this.info = L.control();
+
+			this.info.onAdd = function(map) {
+				this._div = L.DomUtil.create('div', 'info');
+				this.update();
+				return this._div;
+			};
+
+			this.info.update = function(props) {
+				this._div.innerHTML = '<h4>Aktuell</h4>'
+						+ (props ? '<b>' + props.GEN + ' (' + props.DES + ')</b> ' + props.RS
+								: 'Mit der der Maus auswählen');
+			};
+
+			this.info.addTo(this.leafletMap);
+		},
 		addTileLayer : function() {
 			var attribution = '© 2013 CloudMade – Map data <a href="http://creativecommons.org/licenses/by-sa/2.0/">CCBYSA</a> 2013 <a href="http://www.openstreetmap.org/">OpenStreetMap.org</a> contributors – <a href="http://cloudmade.com/terms_conditions">Terms of Use</a>';
 			L
@@ -122,6 +140,14 @@
 								} else {
 									selectLayer(e.target);
 								}
+							});
+
+							layer.on("mouseover", function(e) {
+								that.info.update(feature.properties);
+							});
+
+							layer.on("mouseout", function(e) {
+								that.info.update();
 							});
 
 						}
