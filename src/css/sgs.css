@@ -1,0 +1,21 @@
+body {
+	min-width: 800px;
+}
+
+#map,
+#nav {
+	position: absolute;
+	top: 50px;
+	bottom: 0;
+}
+
+#map {
+	left: 0;
+	right: 260px;
+}
+
+#nav {
+	right: 0;
+	width: 260px;
+	background: #F0F0F0;
+}
