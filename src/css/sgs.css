@@ -20,6 +20,8 @@ body {
 	background: #eee;
 }
 
-.options {
-	padding: 14px;
+.options,
+.controls {
+	padding: 0 14px;
+	margin-bottom: 2em;
 }

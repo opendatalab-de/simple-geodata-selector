@@ -28,6 +28,35 @@
 	
 	<div id="nav">
 		<form class="options">
+			<p>
+				Ausgewählte Landkreise: <strong>20</strong>
+			</p>
+		
+			<fieldset>
+				<legend>Optionen</legend>
+				
+				<div class="form-group">
+					<label>Simplify</label>
+					<select name="simplify">
+						<option value="200">200</option>
+						<option value="20">20</option>
+						<option value="0">0</option>
+					</select>
+				</div>
+
+				<div class="form-group">
+					<label>Was exportieren?</label>
+					<select name="exportLayer">
+						<option value="gemeinden">Gemeinden</option>
+						<option value="landkreise">Landkreise</option>
+					</select>
+				</div>
+				
+				<button type="submit" class="btn btn-default">Export .geojson</button>
+			</fieldset>
+		</form>
+		
+		<form class="controls">
 			<fieldset>
 				<legend>Bundesländer</legend>
 				<div class="checkbox">
