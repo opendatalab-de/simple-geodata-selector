@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+<meta charset="utf-8" /> 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
 <title>Simple Geodata Selector</title>
-<meta name="description" content="Simple Geodata Selector" />
+<meta name="description" content="Simple Geodata Selector" /> 
 <meta name="author" content="OpenDataLab - Adrian Stabiszewski, Felix Ebert">
 
 <!-- build:css css/hdv.css -->
-<link href="css/bootstrap.css" rel="stylesheet" />
-<link href="css/leaflet.css" rel="stylesheet" />
-<link href="css/sgs.css" rel="stylesheet" />
+<link href="css/bootstrap.css" rel="stylesheet" /> 
+<link href="css/leaflet.css" rel="stylesheet" /> 
+<link href="css/sgs.css" rel="stylesheet" /> 
 <!-- endbuild -->
 </head>
 <body>
@@ -25,12 +25,100 @@
 	</div>
 	
 	<div id="map"></div>
-	<div id="nav"></div>
+	<div class="ajax-loader"></div>
+	
+	<div id="nav">
+		<form class="options">
+			<p>
+				Ausgewählte Landkreise: <strong>20</strong>
+			</p>
+		
+			<fieldset>
+				<legend>Optionen</legend>
+				
+				<div class="form-group">
+					<label>Simplify</label>
+					<select name="simplify">
+						<option value="200">200</option>
+						<option value="20">20</option>
+						<option value="0">0</option>
+					</select>
+				</div>
+
+				<div class="form-group">
+					<label>Was exportieren?</label>
+					<select name="exportLayer">
+						<option value="gemeinden">Gemeinden</option>
+						<option value="landkreise">Landkreise</option>
+					</select>
+				</div>
+				
+				<button type="button" class="btn btn-default btn-export">Export .geojson</button>
+				<button type="button" class="btn btn-default btn-clear">Auswahl löschen</button>
+			</fieldset>
+		</form>
+		
+		<form class="controls">
+			<fieldset class="chkbox-bdl">
+				<legend>Bundesländer</legend>
+				<div class="checkbox">
+					<label><input type="checkbox" value="08" /> Baden-Württemberg</label>
+				</div>
+				<div class="checkbox">
+					<label><input type="checkbox" value="09" /> Bayern</label>
+				</div>
+				<div class="checkbox">
+					<label><input type="checkbox" value="11" /> Berlin</label>
+				</div>
+				<div class="checkbox">
+					<label><input type="checkbox" value="12" /> Brandenburg</label>
+				</div>
+				<div class="checkbox">
+					<label><input type="checkbox" value="04" /> Bremen</label>
+				</div>
+				<div class="checkbox">
+					<label><input type="checkbox" value="02" /> Hamburg</label>
+				</div>
+				<div class="checkbox">
+					<label><input type="checkbox" value="06" /> Hessen</label>
+				</div>
+				<div class="checkbox">
+					<label><input type="checkbox" value="07" /> Rheinland-Pfalz</label>
+				</div>
+				<div class="checkbox">
+					<label><input type="checkbox" value="13" /> Mecklenburg-Vorpommern</label>
+				</div>
+				<div class="checkbox">
+					<label><input type="checkbox" value="03" /> Niedersachsen</label>
+				</div>
+				<div class="checkbox">
+					<label><input type="checkbox" value="05" /> Nordrhein-Westfalen</label>
+				</div>
+				<div class="checkbox">
+					<label><input type="checkbox" value="10" /> Saarland</label>
+				</div>
+				<div class="checkbox">
+					<label><input type="checkbox" value="14" /> Sachsen</label>
+				</div>
+				<div class="checkbox">
+					<label><input type="checkbox" value="15" /> Sachsen-Anhalt</label>
+				</div>
+				<div class="checkbox">
+					<label><input type="checkbox" value="01" /> Schleswig-Holstein</label>
+				</div>
+				<div class="checkbox">
+					<label><input type="checkbox" value="16" /> Thüringen</label>
+				</div>
+			</fieldset>
+			
+		</form>
+	</div>
 
 	<!-- build:js js/hdv.js -->
 	<script src="lib/jquery.js"></script>
 	<script src="lib/bootstrap.js"></script>
 	<script src="lib/leaflet.js"></script>
+	<script src="lib/filesaver.js"></script>
 	<script src="js/app.js"></script>
 	<script src="js/ajax-progress.js"></script>
 	<script src="js/exporter.js"></script>

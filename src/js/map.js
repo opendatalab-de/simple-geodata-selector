@@ -1,18 +1,64 @@
 (function(sgs, L) {
 	'use strict';
 
+	function selectLayer(layer) {
+		layer.setStyle({
+			color : "#ff0000"
+		});
+		layer.selected = true;
+	}
+	function deselectLayer(layer) {
+		layer.setStyle({
+			color : "#03f"
+		});
+		layer.selected = false;
+	}
+	function progressReport(event) {
+		if (event.lengthComputable) {
+			var percent = parseInt((event.loaded / event.total * 100), 10);
+			timer.draw(percent);
+		}
+	}
 	var map = {
 		leafletMap : null,
 		init : function() {
 			this.leafletMap = L.map('map', {
-				center : [ 51.463, 7.88 ],
+				center : [ 51.165691, 10.451526 ],
 				zoom : 7,
 				minZoom : 5,
-				maxZoom : 11
+				maxZoom : 12
 			});
 
 			this.addTileLayer();
 			this.addAreaLayers();
+			var that = this;
+			$('.btn-export').on('click', function() {
+
+				var exportLayer = $('form.options select[name=exportLayer]').val();
+				var simplify = $('form.options select[name=simplify]').val();
+				$('.timer').show();
+
+				$.ajax({
+					dataType : "json",
+					url : 'data/' + exportLayer + '_sim' + simplify + '.geojson',
+					success : function(geoJson) {
+						var selectedRs = sgs.map.getSelectedLayers();
+						var filteredGeoJson = sgs.exporter.filterFeatures(geoJson, selectedRs);
+						var filename = exportLayer + "_simplify" + simplify;
+						sgs.exporter.exportData(filteredGeoJson, filename);
+						$('.timer').hide();
+					},
+					progress : progressReport
+				});
+
+			});
+			$('.btn-clear').on('click', function() {
+
+			});
+
+			$('.chkbox-bdl input[type=checkbox]').on('click', function(element) {
+				that.selectLayers(element.target.value, element.target.checked);
+			});
 		},
 		addTileLayer : function() {
 			var attribution = '© 2013 CloudMade – Map data <a href="http://creativecommons.org/licenses/by-sa/2.0/">CCBYSA</a> 2013 <a href="http://www.openstreetmap.org/">OpenStreetMap.org</a> contributors – <a href="http://cloudmade.com/terms_conditions">Terms of Use</a>';
@@ -30,7 +76,7 @@
 
 			$.ajax({
 				dataType : "json",
-				url : 'data/landkreise.geojson',
+				url : 'data/landkreise_sim200.geojson',
 				success : function(geojson) {
 					L.geoJson(geojson.features, {
 						style : {
@@ -41,35 +87,33 @@
 							landkreise[feature.properties.RS] = layer;
 							layer.on("click", function(e) {
 								if (e.target.selected) {
-									e.target.setStyle({
-										color : "#03f"
-									});
-									e.target.selected = false;
+									deselectLayer(e.target);
 								} else {
-									e.target.setStyle({
-										color : "#ff0000"
-									});
-									e.target.selected = true;
+									selectLayer(e.target);
 								}
 							});
 
 						}
 					}).addTo(that.leafletMap);
 					$('.ajax-loader').hide();
-					that.selectLayers('');
-
 				},
-				progress : function(evt) {
-					if (evt.lengthComputable) {
-						var percent = parseInt((evt.loaded / evt.total * 100), 10);
-						console.log("Loaded " + percent + "%");
-					} else {
-						console.log("Length not computable.");
-					}
-				}
+				progress : progressReport
 			});
 		},
-		selectLayers : function(rs) {
+		selectLayers : function(rs, select) {
+			var selectedLayers = [];
+			for ( var key in landkreise) {
+				if (key.indexOf(rs) == 0) {
+					if (select) {
+						selectLayer(landkreise[key]);
+					} else {
+						deselectLayer(landkreise[key]);
+					}
+				}
+			}
+			return selectedLayers;
+		},
+		getSelectedLayers : function() {
 			var selectedLayers = [];
 			for ( var key in landkreise) {
 				if (landkreise[key].selected) {
@@ -78,6 +122,7 @@
 			}
 			return selectedLayers;
 		}
+
 	};
 
 	sgs.map = map;
