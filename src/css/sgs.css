@@ -25,3 +25,84 @@ body {
 	padding: 0 14px;
 	margin-bottom: 2em;
 }
+
+.timer {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: -100px 0 0 -100px;
+	z-index: 10000;
+	font-size: 200px;
+	width: 1em;
+	height: 1em;
+	float: left;
+}
+
+.timer>.percent {
+	position: absolute;
+	top: 1.05em;
+	left: 6px;
+	width: 3.33em;
+	font-size: 0.22em;
+	text-align: center;
+}
+
+.timer>#slice {
+	position: absolute;
+	width: 1em;
+	height: 1em;
+	clip: rect(0px, 1em, 1em, 0.5em);
+}
+
+.timer>#slice.gt50 {
+	clip: rect(auto, auto, auto, auto);
+}
+
+.timer>#slice>.pie {
+	border: 0.1em solid #c0c0c0;
+	position: absolute;
+	width: 0.8em; /* 1 - (2 * border width) */
+	height: 0.8em; /* 1 - (2 * border width) */
+	clip: rect(0em, 0.5em, 1em, 0em);
+	-moz-border-radius: 0.5em;
+	-webkit-border-radius: 0.5em;
+	border-radius: 0.5em;
+	-webkit-animation: pulsate 1s ease-out infinite;
+	-moz-animation: spin 1s ease-out infinite;
+	-ms-animation: spin 1s ease-out infinite;
+	-o-animation: spin 1s ease-out infinite;
+	animation: spin 1s ease-out infinite;
+}
+
+.timer>#slice>.pie.fill {
+	-moz-transform: rotate(180deg) !important;
+	-webkit-transform: rotate(180deg) !important;
+	-o-transform: rotate(180deg) !important;
+	transform: rotate(180deg) !important;
+}
+
+@-webkit-keyframes pulsate {
+    from { opacity: 0.4; }
+    50% { opacity: 1.0; }
+    to { opacity: 0.4; }
+}
+@-moz-keyframes spin {
+    from { opacity: 0.4; }
+    50% { opacity: 1.0; }
+    to { opacity: 0.4; }
+}
+@-ms-keyframes spin {
+    from { opacity: 0.4; }
+    50% { opacity: 1.0; }
+    to { opacity: 0.4; }
+}
+@-o-keyframes spin {
+    from { opacity: 0.4; }
+    50% { opacity: 1.0; }
+    to { opacity: 0.4; }
+}
+@keyframes spin {
+    from { opacity: 0.4; }
+    50% { opacity: 1.0; }
+    to { opacity: 0.4; }
+}
