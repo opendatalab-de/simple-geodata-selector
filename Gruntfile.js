@@ -94,6 +94,11 @@ module.exports = function(grunt) {
 					ext: '.json'
 				}]
 			}
+		},
+		devserver: {
+			options: {
+				port: 8888
+			}
 		}
 	});
 
@@ -108,6 +113,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-jsonmin');
 	grunt.loadNpmTasks('grunt-rev');
 	grunt.loadNpmTasks('grunt-usemin');
+	grunt.loadNpmTasks('grunt-devserver');
 
 	grunt.registerTask('dataupdate', ['jsonmin:dist']);
 	grunt.registerTask('build', ['clean:dist', 'useminPrepare', 'imagemin', 'concat', 'cssmin', 'uglify', 'copy:dist', 'rev', 'usemin']);
