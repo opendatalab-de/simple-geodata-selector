@@ -1,19 +1,13 @@
 basePath = '../';
 
-files = [
-  JASMINE,
-  JASMINE_ADAPTER,
-  'src/lib/*.js',
-  'src/js/app.js',
-  'src/js/*.js',
-  'test/unit/**/*.js'
-];
+files = [ JASMINE, JASMINE_ADAPTER, 'src/lib/*.js', 'src/js/app.js', 'src/js/*.js',
+		'test/unit/testData.js', 'test/unit/**/*.js' ];
 
 autoWatch = true;
 
-browsers = ['Chrome'];
+browsers = [ 'Chrome' ];
 
 junitReporter = {
-  outputFile: 'test_out/unit.xml',
-  suite: 'unit'
+	outputFile : 'test_out/unit.xml',
+	suite : 'unit'
 };
