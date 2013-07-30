@@ -1,8 +1,6 @@
 (function(sgs, L) {
 	'use strict';
 
-	var knownAreaTypes = [ 'Landkreis', 'Kreis', 'Kreisfreie Stadt' ];
-
 	function updateSelectionStatus() {
 
 	}
@@ -12,7 +10,6 @@
 			color: "#ff0000"
 		});
 		layer.selected = true;
-		up
 	}
 	function deselectLayer(layer) {
 		layer.setStyle({
