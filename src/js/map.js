@@ -13,14 +13,14 @@
 	}
 	function selectLayer(layer) {
 		layer.setStyle({
-			color: "#ff0000"
+			color : "#ff0000"
 		});
 		layer.selected = true;
 		updateSelectionStatus();
 	}
 	function deselectLayer(layer) {
 		layer.setStyle({
-			color: "#03f"
+			color : "#03f"
 		});
 		layer.selected = false;
 		updateSelectionStatus();
@@ -32,14 +32,14 @@
 		}
 	}
 	var map = {
-		leafletMap: null,
-		info: null,
-		init: function() {
+		leafletMap : null,
+		info : null,
+		init : function() {
 			this.leafletMap = L.map('map', {
-				center: [51.165691, 10.451526],
-				zoom: 7,
-				minZoom: 5,
-				maxZoom: 12
+				center : [ 51.165691, 10.451526 ],
+				zoom : 7,
+				minZoom : 5,
+				maxZoom : 12
 			});
 			this.createInfoControl();
 			this.addTileLayer();
@@ -52,16 +52,16 @@
 				$('.timer').show();
 
 				$.ajax({
-					dataType: "json",
-					url: 'data/' + exportLayer + '_sim' + simplify + '.geojson',
-					success: function(geoJson) {
+					dataType : "json",
+					url : 'data/' + exportLayer + '_sim' + simplify + '.geojson',
+					success : function(geoJson) {
 						var selectedRs = sgs.map.getSelectedLayers();
 						var filteredGeoJson = sgs.exporter.filterFeatures(geoJson, selectedRs);
 						var filename = exportLayer + "_simplify" + simplify;
 						sgs.exporter.exportData(filteredGeoJson, filename);
 						$('.timer').hide();
 					},
-					progress: progressReport
+					progress : progressReport
 				});
 
 			});
@@ -81,7 +81,7 @@
 			});
 			updateSelectionStatus();
 		},
-		createInfoControl: function() {
+		createInfoControl : function() {
 			this.info = L.control();
 
 			this.info.onAdd = function(map) {
@@ -91,33 +91,42 @@
 			};
 
 			this.info.update = function(props) {
+<<<<<<< HEAD
 				this._div.innerHTML = '<h4>Kreis</h4>'
 						+ (props ? '<b>' + props.GEN + ' (' + props.DES + ')</b> ' + props.RS : 'Mit der der Maus auswählen');
+=======
+				this._div.innerHTML = '<h4>Aktuell</h4>'
+						+ (props ? '<b>' + props.GEN + ' (' + props.DES + ')</b> ' + props.RS
+								: 'Mit der Maus auswählen');
+>>>>>>> refs/remotes/origin/master
 			};
 
 			this.info.addTo(this.leafletMap);
 		},
-		addTileLayer: function() {
+		addTileLayer : function() {
 			var attribution = '© 2013 CloudMade – Map data <a href="http://creativecommons.org/licenses/by-sa/2.0/">CCBYSA</a> 2013 <a href="http://www.openstreetmap.org/">OpenStreetMap.org</a> contributors – <a href="http://cloudmade.com/terms_conditions">Terms of Use</a>';
-			L.tileLayer('http://{s}.tile.cloudmade.com/036a729cf53d4388a8ec345e1543ef53/44094/256/{z}/{x}/{y}.png', {
-				'maxZoom': 18,
-				'attribution': attribution
-			}).addTo(this.leafletMap);
+			L
+					.tileLayer(
+							'http://{s}.tile.cloudmade.com/036a729cf53d4388a8ec345e1543ef53/44094/256/{z}/{x}/{y}.png',
+							{
+								'maxZoom' : 18,
+								'attribution' : attribution
+							}).addTo(this.leafletMap);
 		},
-		addAreaLayers: function(geojson, callback) {
+		addAreaLayers : function(geojson, callback) {
 			$('.ajax-loader').show();
 			var that = this;
 
 			$.ajax({
-				dataType: "json",
-				url: 'data/landkreise_sim200.geojson',
-				success: function(geojson) {
+				dataType : "json",
+				url : 'data/landkreise_sim200.geojson',
+				success : function(geojson) {
 					L.geoJson(geojson.features, {
-						style: {
-							'opacity': 0.5,
-							'weight': 1
+						style : {
+							'opacity' : 0.5,
+							'weight' : 1
 						},
-						onEachFeature: function(feature, layer) {
+						onEachFeature : function(feature, layer) {
 							landkreise[feature.properties.RS] = layer;
 							layer['DES'] = feature.properties.DES;
 							layer.on("click", function(e) {
@@ -140,10 +149,10 @@
 					}).addTo(that.leafletMap);
 					$('.ajax-loader').hide();
 				},
-				progress: progressReport
+				progress : progressReport
 			});
 		},
-		selectLayers: function(rs, select) {
+		selectLayers : function(rs, select) {
 			var selectedLayers = [];
 			for ( var key in landkreise) {
 				if (key.indexOf(rs) == 0) {
@@ -156,7 +165,7 @@
 			}
 			return selectedLayers;
 		},
-		getSelectedLayers: function() {
+		getSelectedLayers : function() {
 			var selectedLayers = [];
 			for ( var key in landkreise) {
 				if (landkreise[key].selected) {
