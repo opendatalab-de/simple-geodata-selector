@@ -26,6 +26,13 @@
 			}
 
 			return result;
+		},
+		exportData : function(data) {
+			var blob = new Blob([ JSON.stringify(data) ], {
+				type : "text/plain;charset=utf-8"
+			});
+			var exportDate = new Date();
+			saveAs(blob, "export_" + exportDate.getTime() + ".geojson");
 		}
 	};
 })(sgs);
