@@ -1,5 +1,7 @@
 var sgs = {};
 
+var landkreise = {};
+
 var bundeslaender = [ {
 	"RS" : "08",
 	"GEN" : "Baden-Württemberg",
