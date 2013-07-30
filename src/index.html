@@ -21,8 +21,24 @@
 	<div class="navbar navbar-inverse navbar-fixed-top">
 		<a class="navbar-brand" href="#">Geodata Selector</a>
 		<ul class="nav navbar-nav">
-			<li><a href="http://blog.opendatalab.de/">About</a></li>
+			<li><a data-toggle="modal" href="#aboutDialog">Info</a></li>
 		</ul>
+	</div>
+
+	<div class="modal fade" id="aboutDialog" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Simple Geodata Selector</h4>
+				</div>
+				<div class="modal-body">
+					<p>
+						Dieses Projekt ermöglicht einen schnellen Export der Gemeindeflächen oder Landkreisflächen in Deutschland im .geojson Format.
+					</p>
+				</div>
+			</div>
+		</div>
 	</div>
 
 	<div class="timer" style="display:none"></div>
@@ -45,7 +61,7 @@
 						</select>
 					</div>
 					<div class="col-6 toggle-tooltip" title="Welche Ebene soll exportiert werden?">
-						<strong>Ebene</strong><br />
+						<strong>Exportieren</strong><br />
 						<select name="exportLayer">
 							<option value="gemeinden">Gemeinden</option>
 							<option value="landkreise">Landkreise</option>

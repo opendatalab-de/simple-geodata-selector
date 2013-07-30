@@ -19,7 +19,7 @@ body {
 	right: 0;
 	width: 280px;
 	background: #FFF;
-	overflow: auto;
+	overflow-y: auto;
 	z-index: 100;
 	opacity: 0.9;
 }
