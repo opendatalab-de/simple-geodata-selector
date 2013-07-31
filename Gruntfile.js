@@ -58,7 +58,7 @@ module.exports = function(grunt) {
 					dot: true,
 					cwd: 'src/',
 					dest: 'dist/',
-					src: ['*.{ico,png,txt,html}', 'img/{,*/}*.{gif}', 'data/*.geojson']
+					src: ['*.{ico,png,txt,html}', 'img/{,*/}*.{gif}', 'data/*.geojson', 'fonts/*']
 				}]
 			}
 		},
