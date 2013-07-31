@@ -67,11 +67,11 @@ body {
 	width: 1em;
 	height: 1em;
 	clip: rect(0px, 1em, 1em, 0.5em);
-	-webkit-animation: pulsate 1s ease-out infinite;
-	-moz-animation: spin 1s ease-out infinite;
-	-ms-animation: spin 1s ease-out infinite;
-	-o-animation: spin 1s ease-out infinite;
-	animation: spin 1s ease-out infinite;
+	-webkit-animation: pulsate 2s ease-out infinite;
+	-moz-animation: pulsate 2s ease-out infinite;
+	-ms-animation: pulsate 2s ease-out infinite;
+	-o-animation: pulsate 2s ease-out infinite;
+	animation: pulsate 2s ease-out infinite;
 }
 
 .timer>#slice.gt50 {
@@ -101,22 +101,22 @@ body {
     50% { opacity: 0.9; }
     to { opacity: 0.4; }
 }
-@-moz-keyframes spin {
+@-moz-keyframes pulsate {
     from { opacity: 0.4; }
     50% { opacity: 0.9; }
     to { opacity: 0.4; }
 }
-@-ms-keyframes spin {
+@-ms-keyframes pulsate {
     from { opacity: 0.4; }
     50% { opacity: 0.9; }
     to { opacity: 0.4; }
 }
-@-o-keyframes spin {
+@-o-keyframes pulsate {
     from { opacity: 0.4; }
     50% { opacity: 0.9; }
     to { opacity: 0.4; }
 }
-@keyframes spin {
+@keyframes pulsate {
     from { opacity: 0.4; }
     50% { opacity: 0.9; }
     to { opacity: 0.4; }
