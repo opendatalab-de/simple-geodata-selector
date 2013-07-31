@@ -108,6 +108,21 @@ module.exports = function(grunt) {
 					keepalive: true
 				}
 			}
+		},
+		rsync: {
+			options: {
+				args: ["--verbose"],
+				exclude: [".git*", "node_modules"],
+				recursive: true
+			},
+			prod: {
+				options: {
+					src: "dist/",
+					dest: "/var/www/opendatalab/public/geodata-selector",
+					host: "ursa.if-core.de",
+					syncDestIgnoreExcl: true
+				}
+			}
 		}
 	});
 
@@ -124,9 +139,11 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-usemin');
 	grunt.loadNpmTasks('grunt-devserver');
 	grunt.loadNpmTasks('grunt-testacular');
+	grunt.loadNpmTasks('grunt-rsync');
 
 	grunt.registerTask('test', ['testacular']);
 	grunt.registerTask('dataupdate', ['jsonmin:dist']);
 	grunt.registerTask('build', ['clean:dist', 'useminPrepare', 'imagemin', 'concat', 'cssmin', 'uglify', 'copy:dist', 'rev', 'usemin']);
+	grunt.registerTask('deploy', ['build', 'rsync:prod']);
 	grunt.registerTask('default', ['build']);
 };

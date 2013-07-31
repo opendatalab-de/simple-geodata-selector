@@ -17,7 +17,8 @@
     "grunt-usemin": "~0.1.10",
     "grunt-jsonmin": "~0.2.4",
     "grunt-devserver": "~0.4.1",
-    "grunt-testacular": "~0.3.0"
+    "grunt-testacular": "~0.3.0",
+    "grunt-rsync": "~0.2.0"
   },
   "engines": {
     "node": ">=0.8.0"
