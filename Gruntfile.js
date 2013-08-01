@@ -118,7 +118,7 @@ module.exports = function(grunt) {
 			prod: {
 				options: {
 					src: "dist/",
-					dest: "/var/www/opendatalab/public/geodata-selector",
+					dest: "/var/www/opendatalab/public/projects/geodata-selector",
 					host: "ursa.if-core.de",
 					syncDestIgnoreExcl: true
 				}
