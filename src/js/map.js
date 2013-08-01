@@ -31,6 +31,29 @@
 			sgs.timer.draw(percent);
 		}
 	}
+
+	var layerControl = {
+		control : null,
+		colors : [ 'brown', 'red', 'black', 'green', 'purple', 'orange', 'grey' ],
+		count : 0,
+		init : function(map) {
+			this.control = L.control.layers();
+			this.control.addTo(map);
+		},
+		addLayer : function(layer, name) {
+			this.control.addOverlay(layer, name);
+			this.count++;
+		},
+		getNextLayerStyle : function() {
+			var color = this.colors[this.count % this.colors.length];
+			return {
+				'color' : color,
+				'fillColor' : color,
+				'weight' : 1
+			};
+		}
+	};
+
 	var map = {
 		leafletMap : null,
 		info : null,
@@ -41,9 +64,13 @@
 				minZoom : 5,
 				maxZoom : 12
 			});
+
 			this.createInfoControl();
+			layerControl.init(this.leafletMap);
+			this.addFileLayerControl();
 			this.addTileLayer();
 			this.addAreaLayers();
+
 			var that = this;
 			$('.btn-export').on('click', function() {
 
@@ -81,6 +108,22 @@
 			});
 			updateSelectionStatus();
 		},
+		addFileLayerControl : function() {
+			var layerOptions = {
+				style : $.proxy(layerControl.getNextLayerStyle, layerControl),
+				onEachFeature : function(feature, layer) {
+					layer.bindPopup(sgs.jsonToTable(feature.properties));
+				}
+			};
+
+			var fileControl = new L.Control.FileLayerLoad({
+				'layerOptions' : layerOptions
+			});
+			this.leafletMap.addControl(fileControl);
+			fileControl.loader.on('data:loaded', function(data) {
+				layerControl.addLayer(data.layer, data.filename);
+			});
+		},
 		createInfoControl : function() {
 			this.info = L.control();
 
@@ -116,7 +159,7 @@
 				dataType : "json",
 				url : 'data/landkreise_sim200.geojson',
 				success : function(geojson) {
-					L.geoJson(geojson.features, {
+					var layer = L.geoJson(geojson.features, {
 						style : {
 							'opacity' : 0.5,
 							'weight' : 1
@@ -141,7 +184,9 @@
 							});
 
 						}
-					}).addTo(that.leafletMap);
+					});
+					layer.addTo(that.leafletMap);
+					layerControl.addLayer(layer, 'Kreise');
 					$('.ajax-loader').hide();
 				},
 				progress : progressReport

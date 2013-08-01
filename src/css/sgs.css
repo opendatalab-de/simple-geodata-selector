@@ -180,3 +180,8 @@ body {
 	margin: 0 0 5px;
 	color: #777;
 }
+
+.property-list {
+	max-height: 300px;
+	overflow-y: auto;
+}
