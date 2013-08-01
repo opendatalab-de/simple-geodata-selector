@@ -55,7 +55,7 @@
 					dataType : "json",
 					url : 'data/' + exportLayer + '_sim' + simplify + '.geojson',
 					success : function(geoJson) {
-						var selectedRs = sgs.map.getSelectedLayers();
+						var selectedRs = sgs.map.getSelectedLayers(exportLayer);
 						var filteredGeoJson = sgs.exporter.filterFeatures(geoJson, selectedRs);
 						var filename = exportLayer + "_simplify" + simplify;
 						sgs.exporter.exportData(filteredGeoJson, filename);
@@ -160,16 +160,23 @@
 			}
 			return selectedLayers;
 		},
-		getSelectedLayers : function() {
+		getSelectedLayers : function(exportLayer) {
 			var selectedLayers = [];
-			for ( var key in landkreise) {
-				if (landkreise[key].selected) {
-					selectedLayers.push(key);
+			if (exportLayer == "bundeslaender") {
+				$('.chkbox-bdl input[type=checkbox]').each(function(index, element) {
+					if (element.checked)
+						selectedLayers.push(element.value);
+				});
+			} else {
+
+				for ( var key in landkreise) {
+					if (landkreise[key].selected) {
+						selectedLayers.push(key);
+					}
 				}
 			}
 			return selectedLayers;
 		}
-
 	};
 
 	sgs.map = map;
