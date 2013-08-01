@@ -6,8 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<title>Simple Geodata Selector</title>
-<meta name="description" content="Simple Geodata Selector" /> 
+<title>GeoJson Utilities - Anzeige, Auswahl und Export von Verwaltungsgebieten in Deutschland</title>
+<meta name="description" content="Webbasierte Werkzeuge zur Anzeige, Auswahl und Export von Verwaltungsgebieten in Deutschland im GeoJson Format." /> 
 <meta name="author" content="OpenDataLab - Adrian Stabiszewski, Felix Ebert">
 
 <!-- build:css css/hdv.css -->
@@ -19,9 +19,11 @@
 </head>
 <body>
 	<div class="navbar navbar-inverse navbar-fixed-top">
-		<a class="navbar-brand" href="#">Geodata Selector</a>
+		<a class="navbar-brand" href="#">GeoJson Utilities</a>
 		<ul class="nav navbar-nav">
-			<li><a data-toggle="modal" href="#aboutDialog">Info</a></li>
+			<li><a data-toggle="modal" href="#helpDialog">Hilfe</a></li>
+			<li><a data-toggle="modal" href="#aboutDialog">Über</a></li>
+			<li><a href="http://blog.opendatalab.de/imprint.html">Impressum</a></li>
 		</ul>
 	</div>
 
@@ -30,12 +32,62 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Simple Geodata Selector</h4>
+					<h4 class="modal-title">GeoJson Utilities</h4>
 				</div>
 				<div class="modal-body">
 					<p>
-						Dieses Projekt ermöglicht einen schnellen Export der Gemeindeflächen oder Landkreisflächen in Deutschland im .geojson Format.
+						Dieses Projekt ermöglicht einen schnellen Export der Gemeindeflächen, Landkreisflächen und Bundeslandflächen in Deutschland im .geojson Format.
 						Jede exportierte Fläche enthält zusätzlich hilfreiche Eigenschaften wie die Einwohnerzahl und Fläche in Quadratmeter. So können aus den exportieren GeoJSON-Dateien schnell Visualisierungen erstellt werden.
+					</p><p>
+						In den Properties der einzelnen GeoJson Features sind folgende Werte enthalten:
+					</p>
+					<table class="table table-striped">
+					<tr><td>RS</td><td>Regionalschlüssel.<br>Je nach Ebene 2-stellig, 5-stellig oder 12-stellig.</td></tr>
+					<tr><td>GEN</td><td>Geographischer Name</td></tr>
+					<tr><td>DES</td><td>amtliche Bezeichnung der Verwaltungseinheit</td></tr>
+					<tr><td>SHAPE_AREA</td><td>Fläche in Quadratmetern</td></tr>
+					<tr><td>EWZ_M</td><td>Einwohnerzahlen (Männer)</td></tr>
+					<tr><td>EWZ_W</td><td>Einwohnerzahlen (Frauen)</td></tr>
+					</table>
+					<p>
+					Datenquellen:<br/>				
+					GeoDaten: <a href="http://www.geodatenzentrum.de/geodaten/gdz_rahmen.gdz_div?gdz_spr=deu&gdz_akt_zeile=5&gdz_anz_zeile=0&gdz_user_id=0">Geodatenzentrum</a>
+					© GeoBasis-DE / BKG 2013 (Daten verändert)					
+					<br/>
+					Einwohnerzahlen: <a href="https://www.destatis.de/DE/ZahlenFakten/LaenderRegionen/Regionales/Gemeindeverzeichnis/Administrativ/AdministrativeUebersicht.html">Statistisches Bundesamt, Wiesbaden 2013</a>
+					<br/>
+					Erstellt von <a href="http://blog.opendatalab.de">OpenDataLab</a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="helpDialog" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">GeoJson Utilities - Hilfe</h4>
+				</div>
+				<div class="modal-body">
+					<h4>Auswahl</h4>
+					<p>
+					Wähle mit der Maus die gewünschten Landkreise auf der Karte oder verwende die Checkboxen
+					auf der rechten Seite um ganze Bundesländer auszuwählen.
+					</p>
+					<p>
+					Definiere mit Simplify, wie stark die Polygone vereinfacht werden sollen. 
+					0 bedeutet keine Vereinfachung und große Datenmenge, 200 bedeutet starke Vereinfache und kleine Datenmenge.
+					Die Darstellung auf der Karte erfolgt mit Simplify 200.
+					</p>
+					<p>
+					Wähle über die Auswahlliste, ob du Gemeinden, Landkreise oder Bundesländer exportiert haben möchtest.
+					</p>
+					<h4>Anzeige</h4>
+					<p>
+					Ziehe eine geoJson Datei in den Browser um sie darzustellen. Jeder geoJson Datei wird in einem eigenen Layer dargestellt.
+					Verwende den Layer-Switcher um bestimmte Layer ein- oder auszublenden.
 					</p>
 				</div>
 			</div>
