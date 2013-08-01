@@ -37,7 +37,9 @@
 		colors : [ 'brown', 'red', 'black', 'green', 'purple', 'orange', 'grey' ],
 		count : 0,
 		init : function(map) {
-			this.control = L.control.layers();
+			this.control = L.control.layers(null, null, {
+				position : 'topleft'
+			});
 			this.control.addTo(map);
 		},
 		addLayer : function(layer, name) {
@@ -66,8 +68,8 @@
 			});
 
 			this.createInfoControl();
-			layerControl.init(this.leafletMap);
 			this.addFileLayerControl();
+			layerControl.init(this.leafletMap);
 			this.addTileLayer();
 			this.addAreaLayers();
 
