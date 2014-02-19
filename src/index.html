@@ -6,8 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<title>GeoJson Utilities - Anzeige, Auswahl und Export von Verwaltungsgebieten in Deutschland</title>
-<meta name="description" content="Webbasierte Werkzeuge zur Anzeige, Auswahl und Export von Verwaltungsgebieten in Deutschland im GeoJson Format." /> 
+<title>GeoJSON Utilities - Anzeige, Auswahl und Export von Verwaltungsgebieten in Deutschland</title>
+<meta name="description" content="Webbasierte Werkzeuge zur Anzeige, Auswahl und Export von Verwaltungsgebieten in Deutschland im GeoJSON Format." /> 
 <meta name="author" content="OpenDataLab - Adrian Stabiszewski, Felix Ebert">
 
 <!-- build:css css/hdv.css -->
@@ -20,11 +20,11 @@
 <body>
 	<div class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="#">GeoJson Utilities</a>
+			<a class="navbar-brand" href="#">GeoJSON Utilities</a>
 			<ul class="nav navbar-nav">
-				<li><a data-toggle="modal" href="#helpDialog">Hilfe</a></li>
-				<li><a data-toggle="modal" href="#aboutDialog">Über</a></li>
-				<li><a href="http://blog.opendatalab.de/imprint.html">Impressum</a></li>
+				<li><a data-toggle="modal" href="#helpDialog"><span class="glyphicon glyphicon-question-sign"></span> Hilfe</a></li>
+				<li><a data-toggle="modal" href="#aboutDialog"><span class="glyphicon glyphicon-info-sign"></span> Über</a></li>
+				<li><a href="http://blog.opendatalab.de/imprint.html"><span class="glyphicon glyphicon-share-alt"></span> Impressum</a></li>
 			</ul>
 		</div>
 	</div>
@@ -34,14 +34,14 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					<h4 class="modal-title">GeoJson Utilities</h4>
+					<h4 class="modal-title">GeoJSON Utilities</h4>
 				</div>
 				<div class="modal-body">
 					<p>
 						Dieses Projekt ermöglicht einen schnellen Export der Gemeindeflächen, Landkreisflächen und Bundeslandflächen in Deutschland im .geojson Format.
 						Jede exportierte Fläche enthält zusätzlich hilfreiche Eigenschaften wie die Einwohnerzahl und Fläche in Quadratmeter. So können aus den exportieren GeoJSON-Dateien schnell Visualisierungen erstellt werden.
 					</p><p>
-						In den Properties der einzelnen GeoJson Features sind folgende Werte enthalten:
+						In den Properties der einzelnen GeoJSON Features sind folgende Werte enthalten:
 					</p>
 					<table class="table table-striped">
 					<tr><td>RS</td><td>Regionalschlüssel.<br>Je nach Ebene 2-stellig, 5-stellig oder 12-stellig.</td></tr>
@@ -74,7 +74,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					<h4 class="modal-title">GeoJson Utilities - Hilfe</h4>
+					<h4 class="modal-title">GeoJSON Utilities - Hilfe</h4>
 				</div>
 				<div class="modal-body">
 					<h4>Auswahl</h4>
@@ -92,10 +92,43 @@
 					</p>
 					<h4>Anzeige</h4>
 					<p>
-					Ziehe eine geoJson Datei in den Browser um sie darzustellen. Jede geoJson Datei wird in einem eigenen Layer dargestellt.
+					Ziehe eine GeoJSON Datei in den Browser um sie darzustellen. Jede GeoJSON Datei wird in einem eigenen Layer dargestellt.
 					Verwende den Layer-Switcher um bestimmte Layer ein- oder auszublenden. Klicke auf eine Fläche aus der geoJson Datei um die
 					Properties anzuzeigen.
 					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="optionsDialog" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">GeoJSON Export - Optionen</h4>
+				</div>
+				<div class="modal-body">
+					<form role="form" class="options">
+						<div class="form-group">
+							<label for="exportLayer">Welche Flächen bzw. welche Ebene soll exportiert werden?</label>
+							<select id="exportLayer" name="exportLayer" class="form-control">
+								<option value="gemeinden">Gemeindeflächen von allen Gemeinden in den ausgewählten Stadt- &amp; Landkreisen</option>
+								<option value="landkreise">Kreisflächen von allen ausgewählten Stadt- &amp; Landkreisen</option>
+								<option value="bundeslaender">Bundeslandflächen aller Bundesländer, deren Stadt- &amp; Landkreise vollständig ausgewählt sind</option>
+							</select>
+							<p class="help-block">Nicht verwirren lassen! Die Auswahl der Stadt- &amp; Landkreise in der Karte kann wie folgt verstanden werden: Für welches Gebiet interessierst du dich? Die Option hier legt fest, was in diesem Gebiet exportiert werden soll.</p>
+						</div>
+						<div class="form-group">
+							<label for="simplify">Simplify - Wie stark vereinfacht sollen die Flächen exportiert werden?</label>
+							<select id="simplify" name="simplify" class="form-control">
+								<option value="200" selected="selected">200 - stark vereinfacht</option>
+								<option value="20">20 - mittlere Vereinfachung und Genauigkeit</option>
+								<option value="0">0 - höchste Genauigkeit</option>
+							</select>
+							<p class="help-block">Du brauchst exaktere Flächen? Wähle einfach einen niedrigeren Simplify-Wert. Allerdings nimmt die Datenmenge bei niedrigen Simplify-Werten erheblich zu.</p>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -109,6 +142,37 @@
 					<h4 class="modal-title">Regionalstatistikdaten</h4>
 				</div>
 				<div class="modal-body">
+					<div class="panel-group" id="accordion">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"> Realsteuervergleich <small>asdasdas</small></a>
+								</h4>
+							</div>
+							<div id="collapseOne" class="panel-collapse collapse in">
+								<div class="panel-body">
+								<select name="year">
+									<option>2011</option>
+									<option>2010</option>
+									<option>2009</option>
+								</select>steu02 Grundsteuer A - Istaufkommen (Messwert) steu03 Grundsteuer B - Istaufkommen (Messwert) steu04
+									Gewerbesteuer - Istaufkommen (Messwert) steu05 Grundsteuer A - Grundbetrag (Messwert) steu06 Grundsteuer B - Grundbetrag (Messwert)
+									steu07 Gewerbesteuer - Grundbetrag (Messwert) stenw1 Grundsteuer A - Hebesatz (Messwert) stenw2 Grundsteuer B - Hebesatz (Messwert)
+									stenw3 Gewerbesteuer - Hebesatz (Messwert) steu08 Gemeindeanteil an der Einkommensteuer (Messwert) stenw4 Gemeindeanteil an der
+									Umsatzsteuer (Messwert) steu09 Gewerbesteuerumlage (Messwert) stenw5 Gewerbesteuereinnahmen (Aufkommen abzgl. Umlage) (Messwert)</div>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<input type="checkbox" class="checkbox pull-right" /> <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"> Statistik der Sterbefälle </a>
+								</h4>
+							</div>
+							<div id="collapseTwo" class="panel-collapse collapse">
+								<div class="panel-body"></div>
+							</div>
+						</div>
+					</div>
 					<ul class="list-unstyled">
 						<li>
 							<label><input type="checkbox" class="regenesis-table" value="71231gj001"> Realsteuervergleich</label>
@@ -131,42 +195,39 @@
 	<div id="map"></div>
 	
 	<div id="nav">
-		<form class="options">
+		<form>
 			<fieldset>
 				<legend>Export</legend>
 				
 				<p>
-					<strong>Ausgewählte Landkreise: </strong>
+					<strong>Gewählte Stadt- &amp; Landkreise: </strong>
 					<span id="selectionStatus"></span> / 402
 				</p>
-
+				
 				<p>
-					<strong title="Wie stark vereinfacht sollen die Polygone exportiert werden?">Simplify</strong><br />
-					<select name="simplify">
-						<option value="200">200</option>
-						<option value="20">20</option>
-						<option value="0">0</option>
-					</select>
-				</p>
-
-				<p>
-					<strong title="Welche Ebene soll exportiert werden? (Für Bundesländer Auswahlhilfe verwenden)">Was exportieren?</strong><br />
-					<select name="exportLayer">
-						<option value="gemeinden">Gemeindeflächen in den Kreisen</option>
-						<option value="landkreise">Kreisflächen</option>
-						<option value="bundeslaender">Bundeslandflächen</option>
-					</select>
-				</p>
-
-				<p>
-					<strong>Zusätzliche Daten gewünscht?</strong><br />
-					<a class="btn btn-xs btn-default btn-select-data" data-toggle="modal" href="#selectDataDialog">Daten auswählen (0)</a>
+					<div class="btn-group">
+						<a class="btn btn-default" data-toggle="modal" href="#optionsDialog"><span class="glyphicon glyphicon-wrench"></span> Optionen</a>
+						<a class="btn btn-default" data-toggle="modal" href="#selectDataDialog"><span class="glyphicon glyphicon-briefcase"></span> Zusätzliche Daten</a>
+					</div>
 				</p>
 				
-				<button type="button" class="btn btn-primary btn-export">
-					<span class="glyphicon glyphicon-download"></span>
-					Export .geojson
-				</button>
+				<p>
+					<button type="button" class="btn btn-primary btn-export">
+						<span class="glyphicon glyphicon-download"></span>
+						Export .geojson
+					</button>
+				</p>
+				
+				<div class="alert alert-info">
+					<span class="glyphicon glyphicon-info-sign"></span> Du möchtest Gemeindeflächen im GeoJSON-Format? Einfach die zugehörigen Landkreise auswählen.</strong>  
+				</div>
+			</fieldset>
+		</form>
+		
+		<form class="controls">
+			<fieldset>
+				<legend>Anzeige</legend>
+				<p>Einfach eine .geojson Datei auf die Karte ziehen - fertig! Verfeinern kannst du die Anzeige mit der Ebenen-Auswahl links unten.
 			</fieldset>
 		</form>
 		

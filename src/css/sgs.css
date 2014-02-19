@@ -8,43 +8,32 @@ body {
 	bottom: 0;
 	top: 50px;
 }
-
 #map {
 	left: 0;
-	right: 280px;
+	right: 300px;
 	z-index: 0;
 }
-
 #nav {
 	right: 0;
-	width: 280px;
+	width: 300px;
 	background: #FFF;
 	overflow-y: auto;
 	z-index: 100;
 	opacity: 0.9;
+	padding: 14px;
 }
 
-.options,
-.controls {
-	padding: 7px 14px 0 14px;
-	margin-bottom: 2em;
-}
-.controls {
-	padding-top: 0;
-}
-.btn-clear,
+/** export form **/
 .btn-export {
-	margin-top: 1em;
+	margin: 0.3em 0 0.9em;
 }
 
-#selectionStatus .table {
-	margin-bottom: 0;
-}
+/** data selection **/
 
-/** select data **/
 .list-level-2 > li {
 	margin-left: 2em;
 }
+
 
 /** timer **/
 
