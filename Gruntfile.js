@@ -1,132 +1,137 @@
 module.exports = function(grunt) {
 	'use strict';
-	grunt
-			.initConfig({
-				pkg : grunt.file.readJSON('package.json'),
-				uglify : {
-					options : {
-						banner : '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
-					}
+	grunt.initConfig({
+		pkg: grunt.file.readJSON('package.json'),
+		uglify: {
+			options: {
+				banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
+			}
+		},
+		jshint: {
+			files: ['gruntfile.js', 'src/js/*.js'],
+			options: {
+				globals: {
+					jQuery: true,
+					console: true,
+					window: true,
+					hdv: true,
+					_: true,
+					Handlebars: true,
+					L: true
 				},
-				jshint : {
-					files : [ 'gruntfile.js', 'src/js/*.js' ],
-					options : {
-						globals : {
-							jQuery : true,
-							console : true,
-							window : true,
-							hdv : true,
-							_ : true,
-							Handlebars : true,
-							L : true
-						},
-						laxbreak : true
-					}
+				laxbreak: true
+			}
+		},
+		rev: {
+			options: {
+				encoding: 'utf8',
+				algorithm: 'md5',
+				length: 8
+			},
+			assets: {
+				files: [{
+					src: ['dist/{css,js}/*.{js,css}']
+				}]
+			}
+		},
+		watch: {
+			files: ['<%= jshint.files %>'],
+			tasks: ['jshint']
+		},
+		useminPrepare: {
+			html: ['src/*.html'],
+			options: {
+				dest: 'dist/'
+			}
+		},
+		usemin: {
+			html: ['dist/**/*.html'],
+			css: ['dist/**/*.css'],
+			options: {
+				dirs: ['dist/']
+			}
+		},
+		copy: {
+			dist: {
+				files: [{
+					expand: true,
+					dot: true,
+					cwd: 'src/',
+					dest: 'dist/',
+					src: ['*.{ico,png,txt,html}', 'img/{,*/}*.{gif}', 'data/*.geojson', 'fonts/*']
+				}]
+			}
+		},
+		clean: {
+			dist: {
+				files: [{
+					dot: true,
+					src: ['dist/{css,js,img}']
+				}]
+			}
+		},
+		imagemin: {
+			dist: {
+				files: [{
+					expand: true,
+					cwd: 'src/img',
+					src: '{,*/}*.{png,jpg,jpeg}',
+					dest: 'dist/img'
+				}]
+			}
+		},
+		jsonmin: {
+			dist: {
+				options: {
+					stripWhitespace: true,
+					stripComments: true
 				},
-				rev : {
-					options : {
-						encoding : 'utf8',
-						algorithm : 'md5',
-						length : 8
-					},
-					assets : {
-						files : [ {
-							src : [ 'dist/{css,js}/*.{js,css}' ]
-						} ]
-					}
-				},
-				watch : {
-					files : [ '<%= jshint.files %>' ],
-					tasks : [ 'jshint' ]
-				},
-				useminPrepare : {
-					html : [ 'src/*.html' ],
-					options : {
-						dest : 'dist/'
-					}
-				},
-				usemin : {
-					html : [ 'dist/**/*.html' ],
-					css : [ 'dist/**/*.css' ],
-					options : {
-						dirs : [ 'dist/' ]
-					}
-				},
-				copy : {
-					dist : {
-						files : [ {
-							expand : true,
-							dot : true,
-							cwd : 'src/',
-							dest : 'dist/',
-							src : [ '*.{ico,png,txt,html}', 'img/{,*/}*.{gif}', 'data/*.geojson',
-									'fonts/*' ]
-						} ]
-					}
-				},
-				clean : {
-					dist : {
-						files : [ {
-							dot : true,
-							src : [ 'dist/{css,js,img}' ]
-						} ]
-					}
-				},
-				imagemin : {
-					dist : {
-						files : [ {
-							expand : true,
-							cwd : 'src/img',
-							src : '{,*/}*.{png,jpg,jpeg}',
-							dest : 'dist/img'
-						} ]
-					}
-				},
-				jsonmin : {
-					dist : {
-						options : {
-							stripWhitespace : true,
-							stripComments : true
-						},
-						files : [ {
-							expand : true,
-							cwd : 'src/data',
-							src : [ '**/*.json' ],
-							dest : 'dist/data',
-							ext : '.json'
-						} ]
-					}
-				},
-				devserver : {
-					options : {
-						port : 8091
-					}
-				},
-				testacular : {
-					unit : {
-						options : {
-							configFile : 'test/testacular.conf.js',
-							autoWatch : true,
-							keepalive : true
-						}
-					}
-				},
-				rsync : {
-					options : {
-						args : [ "--verbose", "--update", "--human-readable" ],
-						exclude : [ ".git*", "node_modules" ],
-						recursive : true
-					},
-					prod : {
-						options : {
-							src : "dist/",
-							dest : "/var/www/opendatalab/public/projects/geojson-utilities",
-							host : "ursa.if-core.de",
-							syncDestIgnoreExcl : true
-						}
-					}
+				files: [{
+					expand: true,
+					cwd: 'src/data',
+					src: ['**/*.json'],
+					dest: 'dist/data',
+					ext: '.json'
+				}]
+			}
+		},
+		devserver: {
+			options: {
+				port: 8091
+			}
+		},
+		testacular: {
+			unit: {
+				options: {
+					configFile: 'test/testacular.conf.js',
+					autoWatch: true,
+					keepalive: true
 				}
-			});
+			}
+		},
+		rsync: {
+			options: {
+				args: ["--verbose", "--update", "--human-readable"],
+				exclude: [".git*", "node_modules"],
+				recursive: true,
+				ssh: true,
+				src: "dist/",
+				syncDestIgnoreExcl: true,
+				compareMode: 'checksum'
+			},
+			toPrd: {
+				options: {
+					dest: "odl:/var/www/opendatalab/public/projects/geojson-utilities",
+				}
+			},
+			toPrdDry: {
+				options: {
+					dryRun: true,
+					dest: "odl:/var/www/opendatalab/public/projects/geojson-utilities",
+				}
+			}
+		}
+	});
 
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
@@ -143,10 +148,9 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-testacular');
 	grunt.loadNpmTasks('grunt-rsync');
 
-	grunt.registerTask('test', [ 'testacular' ]);
-	grunt.registerTask('dataupdate', [ 'jsonmin:dist' ]);
-	grunt.registerTask('build', [ 'clean:dist', 'useminPrepare', 'imagemin', 'concat', 'cssmin',
-			'uglify', 'copy:dist', 'rev', 'usemin' ]);
-	grunt.registerTask('deploy', [ 'build', 'rsync:prod' ]);
-	grunt.registerTask('default', [ 'build' ]);
+	grunt.registerTask('test', ['testacular']);
+	grunt.registerTask('dataupdate', ['jsonmin:dist']);
+	grunt.registerTask('build', ['clean:dist', 'useminPrepare', 'imagemin', 'concat', 'cssmin', 'uglify', 'copy:dist', 'rev', 'usemin']);
+	grunt.registerTask('deploy', ['build', 'rsync:toPrd']);
+	grunt.registerTask('default', ['build']);
 };
