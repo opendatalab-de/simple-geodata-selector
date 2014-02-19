@@ -2,17 +2,17 @@
 
 (function(sgs) {
 	sgs.exporter = {
-		filterFeatures : function(source, rsPrefixes) {
+		filterFeatures: function(source, rsPrefixes) {
 			var result = {
-				"type" : "FeatureCollection",
-				"crs" : {
-					"type" : "name",
-					"properties" : {
-						"name" : "urn:ogc:def:crs:OGC:1.3:CRS84"
+				"type": "FeatureCollection",
+				"crs": {
+					"type": "name",
+					"properties": {
+						"name": "urn:ogc:def:crs:OGC:1.3:CRS84"
 					}
 				},
-				"source" : "© GeoBasis-DE / BKG 2013 (Daten verändert)",
-				"features" : []
+				"source": "© GeoBasis-DE / BKG 2013 (Daten verändert)",
+				"features": []
 			};
 			for ( var x = 0; x < source.features.length; x++) {
 				var rs = source.features[x].properties.RS;
@@ -25,9 +25,9 @@
 			}
 			return result;
 		},
-		exportData : function(data, filename) {
-			var blob = new Blob([ JSON.stringify(data) ], {
-				type : "text/plain;charset=utf-8"
+		exportData: function(data, filename) {
+			var blob = new Blob([JSON.stringify(data)], {
+				type: "text/plain;charset=utf-8"
 			});
 			saveAs(blob, filename + '.geojson');
 		}
