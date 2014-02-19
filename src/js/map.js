@@ -38,7 +38,7 @@
 		count: 0,
 		init: function(map) {
 			this.control = L.control.layers(null, null, {
-				position: 'topleft'
+				position: 'bottomleft'
 			});
 			this.control.addTo(map);
 		},
@@ -112,12 +112,14 @@
 		},
 		addFileLayerControl: function() {
 			var layerOptions = {
+				fitBounds: true,
 				style: $.proxy(layerControl.getNextLayerStyle, layerControl),
 				onEachFeature: function(feature, layer) {
 					layer.bindPopup(sgs.jsonToTable(feature.properties));
 				}
 			};
 
+			L.Control.FileLayerLoad.LABEL = '<span class="glyphicon glyphicon-folder-open" style="font-size:15px;"></span>';
 			var fileControl = new L.Control.fileLayerLoad({
 				'layerOptions': layerOptions
 			});
