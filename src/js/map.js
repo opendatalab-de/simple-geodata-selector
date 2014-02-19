@@ -78,6 +78,7 @@
 
 				var exportLayer = $('form.options select[name=exportLayer]').val();
 				var simplify = $('form.options select[name=simplify]').val();
+				var regenesisOptions = sgs.map.getRegenesisOptions();
 				$('.timer').show();
 
 				$.ajax({
@@ -86,9 +87,11 @@
 					success: function(geoJson) {
 						var selectedRs = sgs.map.getSelectedLayers(exportLayer);
 						var filteredGeoJson = sgs.exporter.filterFeatures(geoJson, selectedRs);
-						var filename = exportLayer + "_simplify" + simplify;
-						sgs.exporter.exportData(filteredGeoJson, filename);
-						$('.timer').hide();
+						sgs.regenesis.enrich(filteredGeoJson, regenesisOptions, function() {
+							var filename = exportLayer + "_simplify" + simplify;
+							sgs.exporter.exportData(filteredGeoJson, filename);
+							$('.timer').hide();
+						});
 					},
 					progress: progressReport
 				});
@@ -220,6 +223,15 @@
 				}
 			}
 			return selectedLayers;
+		},
+		getRegenesisOptions: function() {
+			var options = {
+				tables: []
+			};
+			$('.regenesis-table:checked').each(function(index, element) {
+				options.tables.push($(element).val());
+			});
+			return options;
 		}
 	};
 

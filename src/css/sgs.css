@@ -41,6 +41,13 @@ body {
 	margin-bottom: 0;
 }
 
+/** select data **/
+.list-level-2 > li {
+	margin-left: 2em;
+}
+
+/** timer **/
+
 .timer {
 	position: absolute;
 	top: 50%;

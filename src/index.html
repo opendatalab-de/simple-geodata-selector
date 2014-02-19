@@ -88,7 +88,7 @@
 					Die Darstellung auf der Karte erfolgt mit Simplify 200.
 					</p>
 					<p>
-					Wähle über die Auswahlliste, ob du Gemeinden, Landkreise oder Bundesländer exportiert haben möchtest.
+					Wähle über die Auswahlliste, ob du Gemeinde-, Landkreis- oder Bundeslandflächen exportiert haben möchtest.
 					</p>
 					<h4>Anzeige</h4>
 					<p>
@@ -96,6 +96,30 @@
 					Verwende den Layer-Switcher um bestimmte Layer ein- oder auszublenden. Klicke auf eine Fläche aus der geoJson Datei um die
 					Properties anzuzeigen.
 					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="selectDataDialog" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Regionalstatistikdaten</h4>
+				</div>
+				<div class="modal-body">
+					<ul class="list-unstyled">
+						<li>
+							<label><input type="checkbox" class="regenesis-table" value="71231gj001"> Realsteuervergleich</label>
+						</li>
+						<li>
+							<label><input type="checkbox" class="regenesis-table" value="12613gjn02"> Statistik der Sterbefälle</label>
+						</li>
+						<li>
+							<label><input type="checkbox" class="regenesis-table" value="12612gjn05"> Statistik der Geburten</label>
+						</li>
+					</ul>
 				</div>
 			</div>
 		</div>
@@ -109,11 +133,11 @@
 	<div id="nav">
 		<form class="options">
 			<fieldset>
-				<legend>GeoJSON Export</legend>
+				<legend>Export</legend>
 				
 				<p>
 					<strong>Ausgewählte Landkreise: </strong>
-					<span id="selectionStatus"></span>
+					<span id="selectionStatus"></span> / 402
 				</p>
 
 				<p>
@@ -132,6 +156,11 @@
 						<option value="landkreise">Kreisflächen</option>
 						<option value="bundeslaender">Bundeslandflächen</option>
 					</select>
+				</p>
+
+				<p>
+					<strong>Zusätzliche Daten gewünscht?</strong><br />
+					<a class="btn btn-xs btn-default btn-select-data" data-toggle="modal" href="#selectDataDialog">Daten auswählen (0)</a>
 				</p>
 				
 				<button type="button" class="btn btn-primary btn-export">
@@ -207,10 +236,12 @@
 	<script src="lib/leaflet.js"></script>
 	<script src="lib/leaflet.filelayer.js"></script>
 	<script src="lib/filesaver.js"></script>
+	<script src="lib/async.js"></script>
 	<script src="js/jquery.ajaxProgress.js"></script>
 	<script src="js/app.js"></script>
 	<script src="js/jsonToTable.js"></script>
 	<script src="js/exporter.js"></script>
+	<script src="js/regenesis.js"></script>
 	<script src="js/map.js"></script>
 	<script src="js/timer.js"></script>
 	<!-- endbuild -->
