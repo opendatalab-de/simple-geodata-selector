@@ -72,13 +72,13 @@
 			layerControl.init(this.leafletMap);
 			this.addTileLayer();
 			this.addAreaLayers();
+			sgs.regenesis.initDialog();
 
 			var that = this;
 			$('.btn-export').on('click', function() {
 
 				var exportLayer = $('form.options select[name=exportLayer]').val();
 				var simplify = $('form.options select[name=simplify]').val();
-				var regenesisOptions = sgs.map.getRegenesisOptions();
 				$('.timer').show();
 
 				$.ajax({
@@ -87,7 +87,7 @@
 					success: function(geoJson) {
 						var selectedRs = sgs.map.getSelectedLayers(exportLayer);
 						var filteredGeoJson = sgs.exporter.filterFeatures(geoJson, selectedRs);
-						sgs.regenesis.enrich(filteredGeoJson, regenesisOptions, function() {
+						sgs.regenesis.enrich(filteredGeoJson, function() {
 							var filename = exportLayer + "_simplify" + simplify;
 							sgs.exporter.exportData(filteredGeoJson, filename);
 							$('.timer').hide();
@@ -223,15 +223,6 @@
 				}
 			}
 			return selectedLayers;
-		},
-		getRegenesisOptions: function() {
-			var options = {
-				tables: []
-			};
-			$('.regenesis-table:checked').each(function(index, element) {
-				options.tables.push($(element).val());
-			});
-			return options;
 		}
 	};
 

@@ -29,11 +29,11 @@ body {
 }
 
 /** data selection **/
-
-.list-level-2 > li {
-	margin-left: 2em;
+.regenesis-selection {
+	height: 450px;
+	max-height: 450px;
+	overflow-y: scroll;
 }
-
 
 /** timer **/
 
