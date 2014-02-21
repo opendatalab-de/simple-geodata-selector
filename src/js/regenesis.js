@@ -86,11 +86,12 @@
 		 * '31.12.2010', '31.12.2011'] }
 		 */];
 
-	var fetchData = function(table, year, callback) {
+	var fetchData = function(table, year, callback, progressCallback) {
 		$.ajax({
 			dataType: 'json',
 			url: 'http://api.regenesis.pudo.org/cube/' + table + '/aggregate?cut=jahr.text:' + year + '&drilldown=gemein',
-			success: callback
+			success: callback,
+			progress: progressCallback
 		});
 	};
 
@@ -111,13 +112,11 @@
 	};
 
 	var enrich = function(geojson, tables, finalCallback) {
-		async.eachLimit(tables, 3, function(table, tableCallback) {
-			async.eachLimit(table.years, 3, function(year, yearCallback) {
-				fetchData(table.code, year, function(data) {
-					enrichWithOneTable(geojson, table.code, year, data);
-					yearCallback();
-				});
-			}, tableCallback);
+		async.eachLimit(tables, 2, function(table, tableCallback) {
+			fetchData(table.code, table.year, function(data) {
+				enrichWithOneTable(geojson, table.code, table.year, data);
+				tableCallback();
+			}, table.progressCallback);
 		}, finalCallback);
 	};
 
@@ -167,7 +166,7 @@
 		});
 	};
 
-	var enrichAccordingToDialog = function(geojson, callback) {
+	var getSelectedTables = function(geojson, callback) {
 		var tables = [];
 
 		$('.form-regenesis').each(function(index, form) {
@@ -176,20 +175,27 @@
 				$(form).find('input[name="year"]:checked').each(function(index, yearCheckbox) {
 					years.push($(yearCheckbox).val());
 				});
+				var code = $(form).find('input[name="table"]').val();
+				var definition = tableDefinitions.filter(function(tableDefinition) {
+					return tableDefinition.code == code;
+				})[0];
 
-				var tableOptions = {
-					'code': $(form).find('input[name="table"]').val(),
-					'years': years
-				};
-				tables.push(tableOptions);
+				years.forEach(function(year) {
+					tables.push({
+						'name': definition.name + ' ' + year,
+						'code': code,
+						'year': year
+					});
+				});
 			}
 		});
 
-		enrich(geojson, tables, callback);
+		return tables;
 	};
 
 	sgs.regenesis = {
-		'enrich': enrichAccordingToDialog,
+		'enrich': enrich,
+		'getSelectedTables': getSelectedTables,
 		'initDialog': initDialog
 	};
 })(sgs, async, jQuery);

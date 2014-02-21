@@ -31,6 +31,41 @@
 			sgs.timer.draw(percent);
 		}
 	}
+	function setupDownloadDialog(tables) {
+		var progressBars = [{
+			'id': 'dl-geojson',
+			'name': 'Download der deutschlandweiten GeoJSON Datei'
+		}];
+		tables.forEach(function(table) {
+			progressBars.push({
+				'id': 'dl-regenesis-' + table.code,
+				'name': table.name,
+				'table': table
+			});
+		});
+
+		var html = '';
+		var progressCallbacks = {};
+		progressBars.forEach(function(progressBar) {
+			var callback = function(event) {
+				var percent = (event.lengthComputable) ? parseInt((event.loaded / event.total * 100), 10) : '100';
+				$('.' + progressBar.id + ' .progress-bar').css('width', percent + '%').find('span').text(percent + '% complete');
+			};
+			progressCallbacks[progressBar.id] = callback;
+			if (progressBar.table) {
+				progressBar.table.progressCallback = callback;
+			}
+
+			html += '<div class="' + progressBar.id + '">';
+			html += '<p>' + progressBar.name + '</p>';
+			html += '<div class="progress progress-striped active"><div class="progress-bar" style="width: 0%">';
+			html += '<span class="sr-only">0% complete</span>';
+			html += '</div></div></div>';
+		});
+		$('.download-progress-box').html(html);
+
+		return progressCallbacks;
+	}
 
 	var layerControl = {
 		control: null,
@@ -76,26 +111,30 @@
 
 			var that = this;
 			$('.btn-export').on('click', function() {
-
+				var selectedRs = sgs.map.getSelectedLayers(exportLayer);
+				if (selectedRs.length < 1) {
+					alert('Wähle zuerst per Klick auf die Karte Stadt- & Landkreise aus, für die Daten exportiert werden sollen.');
+					return false;
+				}
+				var tables = sgs.regenesis.getSelectedTables();
 				var exportLayer = $('form.options select[name=exportLayer]').val();
 				var simplify = $('form.options select[name=simplify]').val();
-				$('.timer').show();
+				var progressCallbacks = setupDownloadDialog(tables);
+				$('#downloadDialog').modal('show');
 
 				$.ajax({
 					dataType: "json",
 					url: 'data/' + exportLayer + '_sim' + simplify + '.geojson',
 					success: function(geoJson) {
-						var selectedRs = sgs.map.getSelectedLayers(exportLayer);
 						var filteredGeoJson = sgs.exporter.filterFeatures(geoJson, selectedRs);
-						sgs.regenesis.enrich(filteredGeoJson, function() {
+						sgs.regenesis.enrich(filteredGeoJson, tables, function() {
 							var filename = exportLayer + "_simplify" + simplify;
 							sgs.exporter.exportData(filteredGeoJson, filename);
-							$('.timer').hide();
+							$('#downloadDialog').modal('hide');
 						});
 					},
-					progress: progressReport
+					progress: progressCallbacks['dl-geojson']
 				});
-
 			});
 			$('.btn-clear').on('click', function() {
 				for ( var key in landkreise) {
@@ -215,7 +254,6 @@
 						selectedLayers.push(element.value);
 				});
 			} else {
-
 				for ( var key in landkreise) {
 					if (landkreise[key].selected) {
 						selectedLayers.push(key);
