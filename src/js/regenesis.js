@@ -4,13 +4,16 @@
 	var tableDefinitions = [{
 		'code': '71231gj001',
 		'name': 'Realsteuern',
+		'urlFragment': 'realsteuervergleich',
 		'years': ['2008', '2009', '2010', '2011']
 	}, {
 		'code': '12612gj005',
 		'name': 'Statistik der Geburten',
+		'urlFragment': 'statistik-der-geburten',
 		'years': ['2008', '2009', '2010', '2012']
 	}, {
 		'code': '12613gj002',
+		'urlFragment': 'statistik-der-sterbefalle',
 		'name': 'Statistik der Sterbefälle',
 		'years': ['2008', '2009', '2010', '2011', '2012']
 	}, /*
@@ -23,18 +26,22 @@
 			 */, {
 		'code': '13211gj001',
 		'name': 'Arbeitsmarktstatistik der Bundesagentur für Arbeit',
+		'urlFragment': 'arbeitsmarktstatistik-der-bundesagentur-fur-arbeit',
 		'years': ['2008', '2012']
 	}, {
 		'code': '73111gj001',
 		'name': 'Lohn- und Einkommensteuerstatistik',
+		'urlFragment': 'lohn-und-einkommensteuerstatistik',
 		'years': ['2012']
 	}, {
 		'code': '45412gj001',
 		'name': 'Tourismuszahlen',
+		'urlFragment': 'monatserhebung-im-tourismus',
 		'years': ['2008', '2009', '2010', '2011']
 	}, {
 		'code': '46241gj001',
 		'name': 'Statistik der Straßenverkehrsunfälle',
+		'urlFragment': 'statistik-der-strassenverkehrsunfalle',
 		'years': ['2008', '2009', '2010', '2011']
 	}, /*
 		 * { 'code': '32271gj001', 'name': 'Erhebung der Wasser- und
@@ -44,6 +51,7 @@
 		// more codes available
 		'code': '31121gj001',
 		'name': 'Statistik der Baufertigstellungen',
+		'urlFragment': 'statistik-der-baufertigstellungen',
 		'years': ['2008', '2009', '2010', '2011', '2012']
 	}, /*
 		 * { // more codes available 'code': '31231gj003', 'name':
@@ -53,11 +61,13 @@
 		// more codes available
 		'code': '71137gj001',
 		'name': 'Kassenergebnisse der Gemeinden',
+		'urlFragment': 'vierteljahrliche-kassenergebnisse-der-gemeinden',
 		'years': ['2008', '2009', '2010', '2011']
 	}, {
 		// more codes available
 		'code': '31111gj001',
 		'name': 'Statistik der Baugenehmigungen',
+		'urlFragment': 'statistik-der-baugenehmigungen',
 		'years': ['2008', '2009', '2010', '2011', '2012']
 	}, /*
 		 * { 'code': '14211gj001', 'name': 'Allgemeine Europawahlstatistik',
@@ -68,6 +78,7 @@
 			 */, {
 		'code': '12711gj001',
 		'name': 'Wanderungsstatistik',
+		'urlFragment': 'wanderungsstatistik',
 		'years': ['2008', '2009', '2010', '2011', '2012']
 	}, /*
 		 * { 'code': '12411gj004', 'name': 'Fortschreibung des
@@ -135,7 +146,7 @@
 				});
 			}
 
-			html += '</form><br /><a href="http://regenesis.pudo.org/regional/statistics/realsteuervergleich.' + table.code.substr(5)
+			html += '</form><br /><a href="http://regenesis.pudo.org/regional/statistics/' + table.urlFragment + '.' + table.code.substr(0, 5)
 					+ '.html" target="_blank" class="btn btn-default"><span class="glyphicon glyphicon-share"></span> Datensatzbeschreibung</a>';
 			html += '</div></div>';
 			html += '</div>';
