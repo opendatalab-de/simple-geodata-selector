@@ -51,6 +51,9 @@
 					<tr><td>EWZ_W</td><td>Einwohnerzahlen (Frauen)</td></tr>
 					</table>
 					<p>
+						Zusätzlich können Daten von <a href="http://www.regionalstatistik.de">regionalstatistik.de</a> in die GeoJSON-Dateien eingebunden werden - siehe Button "Zusätzliche Daten"
+					</p>
+					<p>
 					Datenquellen:<br/>				
 					GeoDaten: <a href="http://www.geodatenzentrum.de/geodaten/gdz_rahmen.gdz_div?gdz_spr=deu&gdz_akt_zeile=5&gdz_anz_zeile=0&gdz_user_id=0">Geodatenzentrum</a>
 					© GeoBasis-DE / BKG 2013 (Daten verändert)					
@@ -127,7 +130,7 @@
 				</div>
 				<div class="modal-body">
 					<div class="alert alert-warning">
-						<span class="glyphicon glyphicon-warning-sign"></span> Experimentelle Funktion - aktuell nur für Gemeinden.
+						<span class="glyphicon glyphicon-warning-sign"></span> Experimentelle Funktion - aktuell nur für Gemeinden und nicht für alle Tabellen.
 					</div>
 				
 					<div class="regenesis-selection panel-group" id="accordion">
@@ -166,6 +169,9 @@
 					</button>
 				</p>
 				
+				<div class="alert alert-danger browser-warning" style="display:none;">
+					<span class="glyphicon glyphicon-warning-sign"></span> Browser-Support: Chrome, Firefox 20+, IE10+ - Safari wird aktuell nicht unterstützt (in Arbeit).</strong>  
+				</div>
 				<div class="alert alert-info">
 					<span class="glyphicon glyphicon-info-sign"></span> Du möchtest Gemeindeflächen im GeoJSON-Format? Einfach die zugehörigen Landkreise auswählen.</strong>  
 				</div>
@@ -244,6 +250,7 @@
 	<script src="lib/bootstrap.js"></script>
 	<script src="lib/leaflet.js"></script>
 	<script src="lib/leaflet.filelayer.js"></script>
+	<script src="lib/blob.js"></script>
 	<script src="lib/filesaver.js"></script>
 	<script src="lib/async.js"></script>
 	<script src="js/jquery.ajaxProgress.js"></script>
@@ -258,6 +265,9 @@
 	<script type="text/javascript">
 		$(function() {
 			sgs.init();
+			if(navigator.userAgent.indexOf("Safari") > -1 && navigator.userAgent.indexOf('Chrome') < 0) {
+				$('.browser-warning').show();
+			}
 		});
 	</script>
 </body>
