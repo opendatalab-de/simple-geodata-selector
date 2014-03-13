@@ -111,14 +111,14 @@
 
 			var that = this;
 			$('.btn-export').on('click', function() {
+				var exportLayer = $('form.options select[name=exportLayer]').val();
+				var simplify = $('form.options select[name=simplify]').val();
 				var selectedRs = sgs.map.getSelectedLayers(exportLayer);
 				if (selectedRs.length < 1) {
 					alert('Wähle zuerst per Klick auf die Karte Stadt- & Landkreise aus, für die Daten exportiert werden sollen.');
 					return false;
 				}
 				var tables = sgs.regenesis.getSelectedTables();
-				var exportLayer = $('form.options select[name=exportLayer]').val();
-				var simplify = $('form.options select[name=simplify]').val();
 				var progressCallbacks = setupDownloadDialog(tables);
 				$('#downloadDialog').modal('show');
 
