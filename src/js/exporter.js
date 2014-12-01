@@ -1,8 +1,10 @@
 'use strict';
 
 (function(sgs) {
+	var elementId = 1;
+	var currentDate = new Date().toJSON();
 	sgs.exporter = {
-		filterFeatures: function(source, rsPrefixes) {
+		filterFeatures: function(source, rsPrefixes, clickThatHood) {
 			var result = {
 				"type": "FeatureCollection",
 				"crs": {
@@ -18,11 +20,29 @@
 				var rs = source.features[x].properties.RS;
 				for ( var p = 0; p < rsPrefixes.length; p++) {
 					if (rs.indexOf(rsPrefixes[p]) == 0) {
-						result.features.push(source.features[x]);
+						if (clickThatHood) {
+							result.features.push(sgs.exporter.convertClickThatHoodProperties(source.features[x]));
+						}
+						else {
+							result.features.push(source.features[x]);
+						}
 						break;
 					}
 				}
 			}
+			return result;
+		},
+		convertClickThatHoodProperties:function(source) {
+			var result = {};
+			var properties = {};
+			properties['name'] = source.properties.GEN;
+			properties['cartodb_id'] = elementId++;
+			properties['created_at'] = currentDate;
+			properties['updated_at'] = currentDate;
+
+			result['properties'] = properties;
+			result['type'] = source['type'];
+			result['geometry'] = source['geometry'];
 			return result;
 		},
 		exportData: function(data, filename) {
