@@ -113,6 +113,7 @@
 			$('.btn-export').on('click', function() {
 				var exportLayer = $('form.options select[name=exportLayer]').val();
 				var simplify = $('form.options select[name=simplify]').val();
+				var clickThatHood = $('form input[name=clickthathood]').prop("checked");
 				var selectedRs = sgs.map.getSelectedLayers(exportLayer);
 				if (selectedRs.length < 1) {
 					alert('Wähle zuerst per Klick auf die Karte Stadt- & Landkreise aus, für die Daten exportiert werden sollen.');
@@ -126,7 +127,7 @@
 					dataType: "json",
 					url: 'data/' + exportLayer + '_sim' + simplify + '.geojson',
 					success: function(geoJson) {
-						var filteredGeoJson = sgs.exporter.filterFeatures(geoJson, selectedRs);
+						var filteredGeoJson = sgs.exporter.filterFeatures(geoJson, selectedRs, clickThatHood);
 						sgs.regenesis.enrich(filteredGeoJson, tables, function() {
 							var filename = exportLayer + "_simplify" + simplify;
 							sgs.exporter.exportData(filteredGeoJson, filename);

@@ -11,3 +11,6 @@ Thumbs.db
 node_modules
 dist
 libpeerconnection.log
+atlassian-ide-plugin.xml
+.idea
+
