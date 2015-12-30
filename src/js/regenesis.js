@@ -1,7 +1,13 @@
 'use strict';
 
 (function(sgs, async, $) {
-	var tableDefinitions = [{
+	var tableDefinitions = [
+		{
+		'code': 'WIKIDATA',
+		'name': 'Wikidata(Daten von Wikipedia)',
+		'urlFragment': 'wikidata',
+		'years': ['2015']
+		},{
 		'code': '71231gj001',
 		'name': 'Realsteuern',
 		'urlFragment': 'realsteuervergleich',
@@ -113,10 +119,22 @@
 
 	var enrich = function(geojson, tables, finalCallback) {
 		async.eachLimit(tables, 2, function(table, tableCallback) {
-			fetchData(table.code, table.year, function(data) {
-				enrichWithOneTable(geojson, table.code, table.year, data);
-				tableCallback();
-			}, table.progressCallback);
+			if(table.code == "WIKIDATA"){
+				async.series([function(callback) {
+					SPARQLRequest(geojson, callback);
+				}],
+				function(err) {
+					console.log(geojson);
+					tableCallback();
+					table.progressCallback();
+				});
+			}
+			else {
+				fetchData(table.code, table.year, function (data) {
+					enrichWithOneTable(geojson, table.code, table.year, data);
+					tableCallback();
+				}, table.progressCallback);
+			}
 		}, finalCallback);
 	};
 
