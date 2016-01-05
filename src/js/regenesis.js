@@ -2,12 +2,12 @@
 
 (function(sgs, async, $) {
 	var tableDefinitions = [
-		{
-		'code': 'WIKIDATA',
-		'name': 'Wikidata(Daten von Wikipedia)',
-		'urlFragment': 'wikidata',
-		'years': ['2015']
-		},{
+	{
+	//'code': 'WIKIDATA',
+	//'name': 'Wikidata (Daten von Wikipedia) ',
+	//'urlFragment': 'wikidata',
+	//'years': ['2015']
+	//},{
 		'code': '71231gj001',
 		'name': 'Realsteuern',
 		'urlFragment': 'realsteuervergleich',
