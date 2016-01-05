@@ -13,4 +13,5 @@ dist
 libpeerconnection.log
 atlassian-ide-plugin.xml
 .idea
-
+*.xls
+vg250*
