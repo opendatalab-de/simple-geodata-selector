@@ -128,10 +128,12 @@
 					url: 'data/' + exportLayer + '_sim' + simplify + '.geojson',
 					success: function(geoJson) {
 						var filteredGeoJson = sgs.exporter.filterFeatures(geoJson, selectedRs, clickThatHood);
-						sgs.regenesis.enrich(filteredGeoJson, tables, function() {
-							var filename = exportLayer + "_simplify" + simplify;
-							sgs.exporter.exportData(filteredGeoJson, filename);
-							$('#downloadDialog').modal('hide');
+						sgs.destatis.enrich(filteredGeoJson, function() {
+							sgs.regenesis.enrich(filteredGeoJson, tables, function() {
+								var filename = exportLayer + "_simplify" + simplify;
+								sgs.exporter.exportData(filteredGeoJson, filename);
+								$('#downloadDialog').modal('hide');
+							});
 						});
 					},
 					progress: progressCallbacks['dl-geojson']
