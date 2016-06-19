@@ -35,10 +35,13 @@
 		var progressBars = [{
 			'id': 'dl-geojson',
 			'name': 'Download der deutschlandweiten GeoJSON Datei'
+		},{
+			'id': 'dl-destatis',
+			'name': 'Download der Destatis-Zahlen'
 		}];
 		tables.forEach(function(table) {
 			progressBars.push({
-				'id': 'dl-regenesis-' + table.code,
+				'id': 'dl-additional-data-' + table.code,
 				'name': table.name,
 				'table': table
 			});
@@ -107,7 +110,7 @@
 			layerControl.init(this.leafletMap);
 			this.addTileLayer();
 			this.addAreaLayers();
-			sgs.regenesis.initDialog();
+			sgs.additionalDataDialog.initDialog();
 
 			var that = this;
 			$('.btn-export').on('click', function() {
@@ -119,7 +122,7 @@
 					alert('Wähle zuerst per Klick auf die Karte Stadt- & Landkreise aus, für die Daten exportiert werden sollen.');
 					return false;
 				}
-				var tables = sgs.regenesis.getSelectedTables();
+				var tables = sgs.additionalDataDialog.getSelectedTables();
 				var progressCallbacks = setupDownloadDialog(tables);
 				$('#downloadDialog').modal('show');
 
@@ -128,11 +131,19 @@
 					url: 'data/' + exportLayer + '_sim' + simplify + '.geojson',
 					success: function(geoJson) {
 						var filteredGeoJson = sgs.exporter.filterFeatures(geoJson, selectedRs, clickThatHood);
-						sgs.destatis.enrich(filteredGeoJson, function() {
-							sgs.regenesis.enrich(filteredGeoJson, tables, function() {
-								var filename = exportLayer + "_simplify" + simplify;
-								sgs.exporter.exportData(filteredGeoJson, filename);
-								$('#downloadDialog').modal('hide');
+						sgs.destatis.enrich(filteredGeoJson, progressCallbacks['dl-destatis'], function() {
+							var wikidataTable = tables.filter(function(table) {
+								return table.source === 'wikidata';
+							});
+							sgs.wikidata.enrich(wikidataTable, filteredGeoJson, function() {
+								var regenesisTables = tables.filter(function(table) {
+									return table.source === 'regenesis';
+								});
+								sgs.regenesis.enrich(filteredGeoJson, regenesisTables, function() {
+									var filename = exportLayer + "_simplify" + simplify;
+									sgs.exporter.exportData(filteredGeoJson, filename);
+									$('#downloadDialog').modal('hide');
+								});
 							});
 						});
 					},
@@ -183,7 +194,7 @@
 			};
 
 			this.info.update = function(props) {
-				this._div.innerHTML = '<h4>Kreis</h4>' + (props ? '<b>' + props.GEN + ' (' + props.DES + ')</b><br>RS: ' + props.RS : 'Mit der Maus auswählen');
+				this._div.innerHTML = '<h4>Kreis</h4>' + (props ? '<b>' + props.GEN + ' (' + props.BEZ + ')</b><br>RS: ' + props.RS : 'Mit der Maus auswählen');
 			};
 
 			this.info.addTo(this.leafletMap);
@@ -209,8 +220,14 @@
 							'weight': 1
 						},
 						onEachFeature: function(feature, layer) {
+							if(landkreise[feature.properties.RS]) {
+								console.log(landkreise[feature.properties.RS].feature.properties.GEN);
+								console.log(feature.properties.GEN);
+								console.log(landkreise[feature.properties.RS].feature.properties);
+								console.log(feature.properties);
+							}
 							landkreise[feature.properties.RS] = layer;
-							layer['DES'] = feature.properties.DES;
+							layer['BEZ'] = feature.properties.BEZ;
 							layer.on("click", function(e) {
 								if (e.target.selected) {
 									deselectLayer(e.target);

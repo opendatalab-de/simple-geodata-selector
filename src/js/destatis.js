@@ -9,6 +9,7 @@
 
     var enrichGeojson = function (geojson, destatisData) {
         geojson.features.forEach(function (feature) {
+            if (!feature.properties || !feature.properties.RS) return true;
             if (feature.properties.RS.length > 5) {
                 // commune
                 feature.properties.destatis = destatisData[feature.properties.RS];
@@ -32,14 +33,15 @@
         });
     };
 
-    var enrich = function (geojson, finalCallback) {
+    var enrich = function (geojson, progressCallback, finalCallback) {
         $.ajax({
             dataType: 'json',
             url: 'data/destatis.json',
             success: function (data) {
                 enrichGeojson(geojson, data);
                 finalCallback();
-            }
+            },
+            progress: progressCallback
         });
     };
 
