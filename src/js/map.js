@@ -1,13 +1,11 @@
 (function(sgs, L) {
 	'use strict';
+	var counties = [];
 
 	function updateSelectionStatus() {
-		var status = 0;
-		for ( var key in landkreise) {
-			if (landkreise[key].selected) {
-				status++;
-			}
-		}
+		var status = counties.filter(function(county) {
+			return county.selected;
+		}).length;
 		$('#selectionStatus').html(status);
 
 	}
@@ -151,14 +149,16 @@
 				});
 			});
 			$('.btn-clear').on('click', function() {
-				for ( var key in landkreise) {
-					if (landkreise[key].selected) {
-						deselectLayer(landkreise[key]);
-					}
-					$('.chkbox-bdl input[type=checkbox]').each(function(index, element) {
-						element.checked = false;
+				counties
+					.filter(function(county) {
+                        return county.selected;
+                    })
+					.forEach(function(county) {
+						deselectLayer(county);
 					});
-				}
+				$('.chkbox-bdl input[type=checkbox]').each(function(index, element) {
+					element.checked = false;
+				});
 			});
 
 			$('.chkbox-bdl input[type=checkbox]').on('click', function(element) {
@@ -220,14 +220,9 @@
 							'weight': 1
 						},
 						onEachFeature: function(feature, layer) {
-							if(landkreise[feature.properties.RS]) {
-								console.log(landkreise[feature.properties.RS].feature.properties.GEN);
-								console.log(feature.properties.GEN);
-								console.log(landkreise[feature.properties.RS].feature.properties);
-								console.log(feature.properties);
-							}
-							landkreise[feature.properties.RS] = layer;
+							counties.push(layer);
 							layer['BEZ'] = feature.properties.BEZ;
+                            layer['RS'] = feature.properties.RS;
 							layer.on("click", function(e) {
 								if (e.target.selected) {
 									deselectLayer(e.target);
@@ -255,15 +250,17 @@
 		},
 		selectLayers: function(rs, select) {
 			var selectedLayers = [];
-			for ( var key in landkreise) {
-				if (key.indexOf(rs) == 0) {
-					if (select) {
-						selectLayer(landkreise[key]);
-					} else {
-						deselectLayer(landkreise[key]);
-					}
-				}
-			}
+            counties
+                .filter(function (county) {
+                    return county.RS.indexOf(rs) === 0
+                })
+                .forEach(function (county) {
+                    if (select) {
+                        selectLayer(county);
+                    } else {
+                        deselectLayer(county);
+                    }
+                });
 			return selectedLayers;
 		},
 		getSelectedLayers: function(exportLayer) {
@@ -274,11 +271,13 @@
 						selectedLayers.push(element.value);
 				});
 			} else {
-				for ( var key in landkreise) {
-					if (landkreise[key].selected) {
-						selectedLayers.push(key);
-					}
-				}
+                counties
+                    .filter(function(county) {
+                        return county.selected;
+                    })
+                    .forEach(function(county) {
+						selectedLayers.push(county.RS);
+                    });
 			}
 			return selectedLayers;
 		}
