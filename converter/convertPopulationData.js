@@ -1,5 +1,5 @@
 /**
- * Convert Destatis AuszugGV3QAktuell.xls
+ * Convert Destatis AuszugGV2QAktuell.xls
  */
 
 var XLSX = require('xlsx');
