@@ -5,7 +5,8 @@
         {
             'code': 'WIKIDATA',
             'name': 'Wikidata (Daten von Wikipedia)',
-            'source': 'wikidata'
+            'source': 'wikidata',
+            'desc': 'Name, KFZ-Kennzeichen, Webseite, Vorwahl, PLZ, Bild, Bürgermeister, erstmalige Erwähnung, Facebook Places ID'
         },
         {
             'code': '71231gj001',
@@ -132,7 +133,7 @@
                     html += ' <div class="checkbox"><label><input type="checkbox" name="keyDate" value="' + keyDate + '" /> ' + keyDate + '</label></div>';
                 });
             } else {
-                html += '<div class="checkbox"><label><input type="checkbox" name="allData" value="1" /> Alle Metadaten</label></div>';
+                html += '<div class="checkbox"><label><input type="checkbox" name="allData" value="1" /> ' + (table.desc ? table.desc : 'Alle Metadaten') + '</label></div>';
             }
 
             html += '</form>';

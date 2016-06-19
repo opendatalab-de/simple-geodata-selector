@@ -2,8 +2,8 @@
 
 (function (sgs) {
     var doRequest = function (callback) {
-        var sparql_querry = 'PREFIX wikibase: <http://wikiba.se/ontology#>\nPREFIX wd: <http://www.wikidata.org/entity/>\nPREFIX wdt: <http://www.wikidata.org/prop/direct/>\n\nSELECT ?cid ?country ?AGS ?website WHERE {\n    ?cid wdt:P31 wd:Q262166 .\n    ?cid wdt:P439 ?AGS .\n    ?cid wdt:P856 ?website .\n    OPTIONAL {\n        ?cid rdfs:label ?country filter (lang(?country) = "de") .\n    }\n}';
-        var url = 'https://query.wikidata.org/bigdata/namespace/wdq/sparql?query=' + encodeURIComponent(sparql_querry);
+        var sparql_query = 'SELECT ?cid ?name ?AGS ?_licence_plate_code ?_official_website ?_local_dialing_code ?_postal_code ?_image ?_head_of_government ?_time_of_earliest_written_record ?_Facebook_Places_ID WHERE {\n  ?cid wdt:P31 wd:Q262166.\n  ?cid wdt:P439 ?AGS.\n  OPTIONAL {\n    ?cid rdfs:label ?name.\n    FILTER((LANG(?name)) = "de")\n  }\n  OPTIONAL { ?cid wdt:P395 ?_licence_plate_code. }\n  OPTIONAL { ?cid wdt:P856 ?_official_website. }\n  OPTIONAL { ?cid wdt:P473 ?_local_dialing_code. }\n  OPTIONAL { ?cid wdt:P281 ?_postal_code. }\n  OPTIONAL { ?cid wdt:P18 ?_image. }\n  OPTIONAL { ?cid wdt:P6 ?_head_of_government. }\n  OPTIONAL { ?cid wdt:P1249 ?_time_of_earliest_written_record. }\n  OPTIONAL { ?cid wdt:P1997 ?_Facebook_Places_ID. }\n}';
+        var url = 'https://query.wikidata.org/bigdata/namespace/wdq/sparql?query=' + encodeURIComponent(sparql_query);
 
         var request = new XMLHttpRequest();
         request.open('GET', url, true);
