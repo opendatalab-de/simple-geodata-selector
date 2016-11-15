@@ -6,7 +6,8 @@
             'code': 'WIKIDATA',
             'name': 'Wikidata (Daten von Wikipedia)',
             'source': 'wikidata',
-            'desc': 'Name, KFZ-Kennzeichen, Webseite, Vorwahl, PLZ, Bild, Bürgermeister, erstmalige Erwähnung, Facebook Places ID'
+            'desc': 'Name, KFZ-Kennzeichen, Webseite, Vorwahl, PLZ, Bild, Bürgermeister, erstmalige Erwähnung, Facebook Places ID',
+            'descriptionUrl': 'https://de.wikipedia.org/wiki/Wikidata'
         },
         {
             'code': '71231gj001',
