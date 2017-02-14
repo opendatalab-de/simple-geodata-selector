@@ -200,7 +200,7 @@
 			this.info.addTo(this.leafletMap);
 		},
 		addTileLayer: function() {
-			var attribution = '<a href="http://www.mapbox.com/about/maps/" target="_blank">Terms &amp; Feedback</a>';
+			var attribution = '<a href="http://www.mapbox.com/about/maps/" target="_blank">Mapbox Terms &amp; Feedback</a> | <a href="http://www.openstreetmap.org/copyright">© OpenStreetMap contributors</a>';
 			L.tileLayer('https://{s}.tiles.mapbox.com/v3/codeforheilbronn.i4fb354c/{z}/{x}/{y}.png', {
 				'maxZoom': 18,
 				'attribution': attribution
