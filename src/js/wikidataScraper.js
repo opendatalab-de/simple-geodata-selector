@@ -47,7 +47,7 @@
 
             geoJSON.features.forEach(function (feature) {
                 feature.properties.wikipedia = wikidata.find(function (entry) {
-                    return entry.AGS == feature.properties.RS.substr(0, 5) + feature.properties.RS.substr(9, 3);
+                    return entry.AGS === feature.properties.AGS;
                 });
             });
             finalCallback();
