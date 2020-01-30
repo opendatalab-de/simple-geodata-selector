@@ -182,9 +182,6 @@
 
 				<p>Datenstand: 31.12.19 (Verwaltungsgrenzen), 31.12.18 (Einwohnerzahlen). Alle Angaben ohne Gewähr.</p>
 
-				<div class="alert alert-danger browser-warning" style="display:none;">
-					<span class="glyphicon glyphicon-warning-sign"></span> Browser-Support: Chrome, Firefox 20+, IE10+ - Safari wird aktuell nicht unterstützt (in Arbeit).</strong>
-				</div>
 				<div class="alert alert-info">
 					<span class="glyphicon glyphicon-info-sign"></span> Du möchtest Gemeindeflächen im GeoJSON-Format? Einfach die zugehörigen Landkreise auswählen.</strong>
 				</div>
@@ -282,9 +279,6 @@
 	<script type="text/javascript">
 		$(function() {
 			sgs.init();
-			if(navigator.userAgent.indexOf("Safari") > -1 && navigator.userAgent.indexOf('Chrome') < 0) {
-				$('.browser-warning').show();
-			}
 		});
 	</script>
 </body>
