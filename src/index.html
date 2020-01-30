@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
-<meta charset="utf-8" /> 
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
 <title>GeoJSON Utilities - Anzeige, Auswahl und Export von Verwaltungsgebieten in Deutschland</title>
-<meta name="description" content="Webbasierte Werkzeuge zur Anzeige, Auswahl und Export von Verwaltungsgebieten in Deutschland im GeoJSON Format." /> 
+<meta name="description" content="Webbasierte Werkzeuge zur Anzeige, Auswahl und Export von Verwaltungsgebieten in Deutschland im GeoJSON Format." />
 <meta name="author" content="OpenDataLab - Adrian Stabiszewski, Felix Ebert">
 
 <!-- build:css css/hdv.css -->
-<link href="css/bootstrap.css" rel="stylesheet" /> 
-<link href="css/bootstrap-theme.css" rel="stylesheet" /> 
-<link href="css/leaflet.css" rel="stylesheet" /> 
-<link href="css/sgs.css" rel="stylesheet" /> 
+<link href="css/bootstrap.css" rel="stylesheet" />
+<link href="css/bootstrap-theme.css" rel="stylesheet" />
+<link href="css/leaflet.css" rel="stylesheet" />
+<link href="css/sgs.css" rel="stylesheet" />
 <!-- endbuild -->
 <link href="https://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.css" rel="stylesheet" />
 </head>
@@ -57,13 +57,14 @@
 						Dieses Projekt aggregiert offene Daten (Open Data) von Behörden. Alle Datenquellen sind genannt und verlinkt. Eine Nennung dieser Seite als Quelle ist nicht erforderlich, aber gerne gesehen.
 					</p>
 					<p>
-					Datenquellen:<br/>				
-					GeoDaten: <a href="http://www.geodatenzentrum.de/geodaten/gdz_rahmen.gdz_div?gdz_spr=deu&gdz_akt_zeile=5&gdz_anz_zeile=0&gdz_user_id=0">Geodatenzentrum</a>
-					© GeoBasis-DE / BKG 2016 (Daten verändert)
+					Datenquellen:<br/>
+					Geodaten: <a href="https://gdz.bkg.bund.de/">Geodatenzentrum</a>
+					© GeoBasis-DE / BKG 2018 (VG250 31.12., Daten verändert)
 					<br/>
-					Einwohnerzahlen: <a href="https://www.destatis.de/DE/ZahlenFakten/LaenderRegionen/Regionales/Gemeindeverzeichnis/Gemeindeverzeichnis.html">Statistisches Bundesamt, Wiesbaden 2016</a> - Gemeindeverzeichnis
+					Einwohnerzahlen: <a
+							href="https://www.destatis.de/DE/ZahlenFakten/LaenderRegionen/Regionales/Gemeindeverzeichnis/Gemeindeverzeichnis.html">Statistisches Bundesamt, Wiesbaden 2019</a> - Gemeindeverzeichnis
 					<hr/>
-					Datenstand: GeoDaten Stand 1.1.2016, Einwohnerzahlen Stand Q2 2016.
+					Datenstand: Geodaten Stand 31.12.2018, Einwohnerzahlen Jahresausgabe 31.12.2018.
 					<br/>
 					Erstellt von <a href="http://blog.opendatalab.de">OpenDataLab</a> (Felix Ebert, Adrian Stabiszewski)
 					<br/>
@@ -113,7 +114,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<div class="modal fade" id="downloadDialog" tabindex="-1">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -123,14 +124,14 @@
 				</div>
 				<div class="modal-body download-progress-report">
 					<p>Die angeforderte GeoJSON Datei wird nun erstellt, indem die benötigten Daten heruntergeladen und gefiltert werden.</p>
-					
+
 					<div class="download-progress-box">
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	
+
 	<div class="modal fade" id="selectDataDialog" tabindex="-1">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -142,7 +143,7 @@
 					<div class="alert alert-warning">
 						<span class="glyphicon glyphicon-warning-sign"></span> Experimentelle Funktion - aktuell nur für Gemeinden und nicht für alle Tabellen.
 					</div>
-				
+
 					<div class="additional-data-selection panel-group" id="accordion">
 					</div>
 				</div>
@@ -154,47 +155,49 @@
 	<div class="ajax-loader"></div>
 
 	<div id="map"></div>
-	
+
 	<div id="nav">
 		<form>
 			<fieldset>
 				<legend>Export</legend>
-				
+
 				<p>
 					<strong>Gewählte Stadt- &amp; Landkreise: </strong>
 					<span id="selectionStatus"></span> / 402
 				</p>
-				
+
 				<p>
 					<div class="btn-group">
 						<a class="btn btn-default" data-toggle="modal" href="#optionsDialog"><span class="glyphicon glyphicon-wrench"></span> Optionen</a>
 						<a class="btn btn-default" data-toggle="modal" href="#selectDataDialog"><span class="glyphicon glyphicon-briefcase"></span> Zusätzliche Daten</a>
 					</div>
 				</p>
-				
+
 				<p>
 					<button type="button" class="btn btn-primary btn-export">
 						<span class="glyphicon glyphicon-download"></span>
 						Export .geojson
 					</button>
 				</p>
-				
+
+				<p>Datenstand: 31.12.19 (Verwaltungsgrenzen), 31.12.18 (Einwohnerzahlen). Alle Angaben ohne Gewähr.</p>
+
 				<div class="alert alert-danger browser-warning" style="display:none;">
-					<span class="glyphicon glyphicon-warning-sign"></span> Browser-Support: Chrome, Firefox 20+, IE10+ - Safari wird aktuell nicht unterstützt (in Arbeit).</strong>  
+					<span class="glyphicon glyphicon-warning-sign"></span> Browser-Support: Chrome, Firefox 20+, IE10+ - Safari wird aktuell nicht unterstützt (in Arbeit).</strong>
 				</div>
 				<div class="alert alert-info">
-					<span class="glyphicon glyphicon-info-sign"></span> Du möchtest Gemeindeflächen im GeoJSON-Format? Einfach die zugehörigen Landkreise auswählen.</strong>  
+					<span class="glyphicon glyphicon-info-sign"></span> Du möchtest Gemeindeflächen im GeoJSON-Format? Einfach die zugehörigen Landkreise auswählen.</strong>
 				</div>
 			</fieldset>
 		</form>
-		
+
 		<form class="controls">
 			<fieldset>
 				<legend>Anzeige</legend>
 				<p>Einfach eine .geojson Datei auf die Karte ziehen - fertig! Verfeinern kannst du die Anzeige mit der Ebenen-Auswahl links unten.
 			</fieldset>
 		</form>
-		
+
 		<form class="controls">
 			<fieldset class="chkbox-bdl">
 				<legend>Auswahlhilfe</legend>
@@ -247,7 +250,7 @@
 					<label><input type="checkbox" value="16" /> Thüringen</label>
 				</div>
 			</fieldset>
-			
+
 			<button type="button" class="btn btn-default btn-clear">
 				<span class="glyphicon glyphicon-remove"></span>
 				Auswahl löschen
