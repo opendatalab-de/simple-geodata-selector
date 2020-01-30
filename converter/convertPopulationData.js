@@ -27,18 +27,17 @@ for(var i = 7; sheet['A' + i]; i++) {
         result[rs] = {
             'RS': rs,
             'area': readCell('I', i),
-            'area_date': readCell('J', i),
-            'population': readCell('K', i),
-            'population_m': readCell('L', i),
-            'population_w': readCell('M', i),
-            'population_density': readCell('N', i),
-            'zip': readCell('O', i),
-            'center_lon': readCell('P', i),
-            'center_lat': readCell('Q', i),
-            'travel_key': readCell('R', i),
-            'travel_desc': readCell('S', i),
-            'density_key': readCell('T', i),
-            'density_desc': readCell('U', i)
+            'population': readCell('J', i),
+            'population_m': readCell('K', i),
+            'population_w': readCell('L', i),
+            'population_density': readCell('M', i),
+            'zip': readCell('N', i),
+            'center_lon': readCell('O', i),
+            'center_lat': readCell('P', i),
+            'travel_key': readCell('Q', i),
+            'travel_desc': readCell('R', i),
+            'density_key': readCell('S', i),
+            'density_desc': readCell('T', i)
         };
     }
 }

@@ -27,13 +27,13 @@ Siehe auch Verzeichnis converter/
 Datenstand
 ==================
 
-Für den Datensatz wurden die Verwaltungsgebiete zum Stand 1.1.2016 verwendet und mit 
-den Einwohner- und Flächenzahlen zum Stand 30.06.2016 (Q2) verknüpft.
+Für den Datensatz wurden die Verwaltungsgebiete zum Stand 31.12.2018 (Quelle: Geodatenzentrum) verwendet und mit
+den Einwohner- und Flächenzahlen zum Stand 31.12.2018 (Jahresausgabe) (Quelle: Destatis) verknüpft.
 
 Datenquellen:
 
-* http://www.geodatenzentrum.de/geodaten/gdz_rahmen.gdz_div?gdz_spr=deu&gdz_akt_zeile=5&gdz_anz_zeile=1&gdz_unt_zeile=14&gdz_user_id=0
-* https://www.destatis.de/DE/ZahlenFakten/LaenderRegionen/Regionales/Gemeindeverzeichnis/Administrativ/AdministrativeUebersicht.html
+* https://gdz.bkg.bund.de/index.php/default/open-data/verwaltungsgebiete-1-250-000-ebenen-stand-31-12-vg250-ebenen-31-12.html
+* https://www.destatis.de/DE/Themen/Laender-Regionen/Regionales/Gemeindeverzeichnis/_inhalt.html
 * http://regenesis.pudo.org/
 
-© GeoBasis-DE / BKG 2016
+© GeoBasis-DE / BKG 2019
