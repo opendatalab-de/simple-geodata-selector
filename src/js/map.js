@@ -200,10 +200,14 @@
 			this.info.addTo(this.leafletMap);
 		},
 		addTileLayer: function() {
-			var attribution = '<a href="http://www.mapbox.com/about/maps/" target="_blank">Mapbox Terms &amp; Feedback</a> | <a href="http://www.openstreetmap.org/copyright">© OpenStreetMap contributors</a>';
-			L.tileLayer('https://{s}.tiles.mapbox.com/v3/codeforheilbronn.i4fb354c/{z}/{x}/{y}.png', {
+			var attribution = 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>';
+			L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
 				'maxZoom': 18,
-				'attribution': attribution
+				'attribution': attribution,
+				'id': 'mapbox/light-v10',
+				'tileSize': 512,
+				'zoomOffset': -1,
+				'accessToken': 'pk.eyJ1IjoiY29kZWZvcmhlaWxicm9ubiIsImEiOiJaVW1RaEhzIn0.dTT9PWOqjBbzpw7S--GnAA'
 			}).addTo(this.leafletMap);
 		},
 		addAreaLayers: function(geojson, callback) {
