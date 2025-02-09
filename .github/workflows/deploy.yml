@@ -30,10 +30,9 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci
-
-      - name: Install Grunt CLI
-        run: npm install -g grunt-cli
+        run: |
+          npm install
+          npm install grunt-cli -g
 
       - name: Build project
         run: grunt build
