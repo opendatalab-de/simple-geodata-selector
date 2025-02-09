@@ -1,8 +1,8 @@
 simple-geodata-selector
 =======================
 
-Online Version: http://opendatalab.de/projects/geojson-utilities/
-
+Online Version: http://opendatalab.de/projects/geojson-utilities/ (Stand 31.12.2018)
+Online Version: http://geodata.bw-im.de (Stand 31.12.2023)
 
 Skripte für Datenkonvertierung
 ==============================
@@ -36,4 +36,4 @@ Datenquellen:
 * https://www.destatis.de/DE/Themen/Laender-Regionen/Regionales/Gemeindeverzeichnis/_inhalt.html
 * http://regenesis.pudo.org/
 
-© GeoBasis-DE / BKG 2019
+© GeoBasis-DE / BKG 2023
