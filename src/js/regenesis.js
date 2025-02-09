@@ -15,7 +15,7 @@
 
         geojson.features.forEach(function (feature) {
             var properties = data.cells.filter(function (cell) {
-                return cell['gemein.name'] == feature.properties.RS.substr(0, 5) + feature.properties.RS.substr(9, 3);
+                return cell['gemein.name'] == feature.properties.ARS.substr(0, 5) + feature.properties.ARS.substr(9, 3);
             });
             if (properties && properties[0]) {
                 delete properties[0]['gemein.name'];

@@ -9,16 +9,16 @@
 
     var enrichGeojson = function (geojson, destatisData) {
         geojson.features.forEach(function (feature) {
-            if (!feature.properties || !feature.properties.RS) return true;
-            if (feature.properties.RS.length > 5) {
+            if (!feature.properties || !feature.properties.ARS) return true;
+            if (feature.properties.ARS.length > 5) {
                 // commune
-                feature.properties.destatis = destatisData[feature.properties.RS];
+                feature.properties.destatis = destatisData[feature.properties.ARS];
             }
             else {
                 // administrative level above commune (county, state)
                 feature.properties.destatis = Object.keys(destatisData)
                     .filter(function (key) {
-                        return key.indexOf(feature.properties.RS) === 0;
+                        return key.indexOf(feature.properties.ARS) === 0;
                     })
                     .map(function (key) {
                         return destatisData[key];
