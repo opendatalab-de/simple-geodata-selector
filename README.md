@@ -1,8 +1,8 @@
 simple-geodata-selector
 =======================
 
-Online Version: http://opendatalab.de/projects/geojson-utilities/
-
+Online Version: http://opendatalab.de/projects/geojson-utilities/ (Stand 31.12.2018)
+Online Version: http://geodata.bw-im.de (Stand 31.12.2023)
 
 Skripte für Datenkonvertierung
 ==============================
@@ -27,8 +27,8 @@ Siehe auch Verzeichnis converter/
 Datenstand
 ==================
 
-Für den Datensatz wurden die Verwaltungsgebiete zum Stand 31.12.2018 (Quelle: Geodatenzentrum) verwendet und mit
-den Einwohner- und Flächenzahlen zum Stand 31.12.2018 (Jahresausgabe) (Quelle: Destatis) verknüpft.
+Für den Datensatz wurden die Verwaltungsgebiete zum Stand 31.12.2023 (Quelle: Geodatenzentrum) verwendet und mit
+den Einwohner- und Flächenzahlen zum Stand 31.12.2023 (Jahresausgabe) (Quelle: Destatis) verknüpft.
 
 Datenquellen:
 
@@ -36,4 +36,4 @@ Datenquellen:
 * https://www.destatis.de/DE/Themen/Laender-Regionen/Regionales/Gemeindeverzeichnis/_inhalt.html
 * http://regenesis.pudo.org/
 
-© GeoBasis-DE / BKG 2019
+© GeoBasis-DE / BKG 2023

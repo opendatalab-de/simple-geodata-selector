@@ -25,7 +25,7 @@ for(var i = 7; sheet['A' + i]; i++) {
     if(readCell('K', i)) {
         var rs = readCell('C', i) + readCell('D', i) + readCell('E', i) + readCell('F', i) + readCell('G', i);
         result[rs] = {
-            'RS': rs,
+            'ARS': rs,
             'area': readCell('I', i),
             'population': readCell('J', i),
             'population_m': readCell('K', i),

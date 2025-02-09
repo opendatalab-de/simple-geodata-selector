@@ -17,7 +17,7 @@
 				"features": []
 			};
 			for ( var x = 0; x < source.features.length; x++) {
-				var rs = source.features[x].properties.RS;
+				var rs = source.features[x].properties.ARS;
 				for ( var p = 0; p < rsPrefixes.length; p++) {
 					if (rs.indexOf(rsPrefixes[p]) == 0) {
 						if (clickThatHood) {
