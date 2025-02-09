@@ -27,8 +27,8 @@ Siehe auch Verzeichnis converter/
 Datenstand
 ==================
 
-Für den Datensatz wurden die Verwaltungsgebiete zum Stand 31.12.2018 (Quelle: Geodatenzentrum) verwendet und mit
-den Einwohner- und Flächenzahlen zum Stand 31.12.2018 (Jahresausgabe) (Quelle: Destatis) verknüpft.
+Für den Datensatz wurden die Verwaltungsgebiete zum Stand 31.12.2023 (Quelle: Geodatenzentrum) verwendet und mit
+den Einwohner- und Flächenzahlen zum Stand 31.12.2023 (Jahresausgabe) (Quelle: Destatis) verknüpft.
 
 Datenquellen:
 
