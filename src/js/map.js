@@ -226,7 +226,7 @@
 						onEachFeature: function(feature, layer) {
 							counties.push(layer);
 							layer['BEZ'] = feature.properties.BEZ;
-                            layer['RS'] = feature.properties.RS;
+                            layer['RS'] = feature.properties.ARS;
 							layer.on("click", function(e) {
 								if (e.target.selected) {
 									deselectLayer(e.target);
